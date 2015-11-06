@@ -4,6 +4,7 @@
   "description": "ppiicc.me",
   "main": "app.js",
   "dependencies": {
+    "500px": "^0.5.1",
     "express": "^4.13.3"
   },
   "devDependencies": {},
