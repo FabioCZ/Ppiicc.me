@@ -4,7 +4,8 @@
   "description": "ppiicc.me",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "imgur-node-api": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {
