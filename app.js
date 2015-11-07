@@ -143,7 +143,7 @@ app.get('/api/user/:userId', function(req, res){
 });
 
 app.post('/api/user/userId', jsonParser, function(req, res){
-	var userToInsert = Object.keys(req.body)[0]
+	var userToInsert = req.body
 
 	console.log("post: ")
 	console.log(userToInsert)
