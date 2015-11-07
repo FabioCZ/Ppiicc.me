@@ -55,7 +55,7 @@ function lookForDuplicateShitAndInsertShit(imgs)
 	for(x = 0; x < imgs.length; x++){
 		var promise = imagesCollection.find(imgs[x])
 
-		promise.success{ function(err, docs){
+		promise.success(function(err, docs){
 			console.log(docs);
 			if(docs.length == 0){
 				console.log('inserting:' + x)
