@@ -10,4 +10,4 @@ curl $add/images/next/Fabio
 echo "voting like:  "
 curl -d '{"test" : "testLike"}' -H 'Content-Type: application/json' $add/vote/like/Fabio
 echo "voting dislike:  "
-curl -d '{"test" : "testDISLike"}' -H 'Content-Type: application/json' $add/vote/like/Fabio
+curl -d '{"test" : "testDISLike"}' -H 'Content-Type: application/json' $add/vote/dislike/Fabio

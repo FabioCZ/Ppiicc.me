@@ -20,7 +20,7 @@ Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) {
 
 function GetPicAndTags(){
 	console.log("started getting more img data")
-	api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 21},  function(error, results) {
+	api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 600},  function(error, results) {
 		if (error) {
 			console.log(error)
 			return;
@@ -151,6 +151,8 @@ app.get('/api/user/:userId', function(req, res){
 			user.name = req.params.userId
 			user.liked = new Array()
 			user.disliked = new Array()
+			users.likedTags =  {}
+			users.dislikedTags = {}
 			userCollection.insert(user, function(err, doc){
 				if(err) throw err;
 				res.json(user)
@@ -189,6 +191,19 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 			console.log("Doc:")
 			console.log(doc)
 			doc.liked.push(req.body)
+
+			for(i = 0; i < req.body.tags.length;i++)
+			{
+				if(doc.likedTags.hasProperty(req.body.tags[i]))
+				{
+					doc[req.body.tags[i]]++;
+				}
+				else
+				{
+					doc[req.body.tags[i]] = 1;
+				}
+			}
+
 			userCollection.remove({'name': doc.name}, function(err, del){
 				if(err) throw err;
 				console.log("deleted " + doc.name)
@@ -210,7 +225,7 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 	console.log(req.body)
 	userCollection.findOne({'name':  req.params.userId},function(err, doc){
 		if(doc){
-			console.log("Doc:")
+			console.log("Doc dislike:")
 			console.log(doc)
 			doc.disliked.push(req.body)
 			userCollection.remove({'name': doc.name}, function(err, del){
@@ -231,7 +246,9 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 
 
 app.get('api/matches/:userId', function(req, res){
+	userCollection.find({} , function (err, doc){
 
+	})
 
 	res.json({"matches" : ["1", "2"]})
 })
