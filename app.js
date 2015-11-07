@@ -81,20 +81,6 @@ function lookForDuplicateShitAndInsertShit(imgs)
 	}
 
 	iterateThroughImgs();
-
-
-	for(x = 0; x < imgs.length; x++){
-		imagesCollection.find(imgs[x], function(err, docs){
-			console.log("found")
-			console.log(docs);
-			if(docs.length == 0){
-				console.log('inserting:' + x)
-				console.log(imgs[x])
-				imagesCollection.insert(imgs[x]);
-			}
-		})
-	}
-
 }
 
 function commonResultHandler( err, res ) {
