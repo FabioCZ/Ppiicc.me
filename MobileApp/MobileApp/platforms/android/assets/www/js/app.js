@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'picmeApp.controllers', 'picmeApp.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -91,3 +91,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $urlRouterProvider.otherwise('/tab/dash');
 
 });
+
+// Register the Controller and Services module
+// Maintains some compatability with the web app
+var picmeServices = angular.module('picmeApp.services', []);
+var picmeControllers = angular.module('picmeApp.controllers', [])
