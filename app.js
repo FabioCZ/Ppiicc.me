@@ -193,13 +193,8 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 			console.log("Doc:")
 			console.log(doc)
 			doc.liked.push(req.body)
-
 			for(i = 0; i < req.body.tags.length;i++)
 			{
-				console.log('body')
-				console.log(req.body)
-				console.log('tags');
-				console.log(req.body.tags[i])
 				if(doc.likedTags.hasOwnProperty(req.body.tags[i]))
 				{
 					doc.likedTags[req.body.tags[i]]++;
@@ -234,6 +229,18 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 			console.log("Doc dislike:")
 			console.log(doc)
 			doc.disliked.push(req.body)
+			for(i = 0; i < req.body.tags.length;i++)
+			{
+				if(doc.dislikedTags.hasOwnProperty(req.body.tags[i]))
+				{
+					doc.dislikedTags[req.body.tags[i]]++;
+				}
+				else
+				{
+					doc.dislikedTags[req.body.tags[i]] = 1;
+				}
+			}
+
 			userCollection.remove({'name': doc.name}, function(err, del){
 				if(err) throw err;
 				console.log("deleted " + doc.name)
