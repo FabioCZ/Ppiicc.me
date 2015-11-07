@@ -24,5 +24,5 @@ picmeApp = picmeApp.config(['$routeProvider', function($routeProvider) {
 
 // Register Services and Controllers
 // (maintaining some compability with mobile app)
-var picmeServices = angular.module('picmeApp.services', '[]');
-var picmeControllers = angular.module('picmeApp.controllers', '[]');
+var picmeServices = angular.module('picmeApp.services', []);
+var picmeControllers = angular.module('picmeApp.controllers', []);
