@@ -3,6 +3,8 @@ picmeApp.controller('PictureCtrl', ['pictureService', '$scope', pictureService, 
 	var PictureCtrl = this;
 	PictureCtrl.scope = $scope;
 	
+	PictureCtrl.picture = [];
+	
 	// Run the controller
 	PictureCtrl.Init();
 	
