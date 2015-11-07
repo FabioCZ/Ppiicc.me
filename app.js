@@ -96,7 +96,6 @@ function commonResultHandler( err, res ) {
 		}
 	}
 }
-
 var imageUpdater = setTimeout(function(){
 	if (imagesCollection.find().count() < 500){
 		GetPicAndTags()
@@ -104,6 +103,7 @@ var imageUpdater = setTimeout(function(){
 		console.log("db full")
 	}
 }, 1000 * 60 * 30);
+
 
 var router = express.Router();
 
@@ -113,9 +113,18 @@ router.get('/images', function(req, res){
 	})
 });
 
+router.get('/:user', function(req, res){
+	imagesCollection.findOne({req.params.user},function(err, doc){
+		if(doc){
+			res.json(docs)
+		}else{
+			res.json({error: "Not found"})
+		}
+	})
+});
+
 
 app.use('/api', router);
-
 app.use(express.static('public'));
 var server = app.listen(3000, function () {
 	var host = server.address().address;
