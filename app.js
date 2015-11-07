@@ -108,11 +108,6 @@ function commonResultHandler( err, res ) {
 // var router = express.Router();
 // app.use('/api', router);
 
-app.post('/test', jsonParser, function (req, res) {
-  if (!req.body) return res.sendStatus(400)
-  console.log(req.body)
-})
-
 app.get('/api/images', function(req, res){
 	imagesCollection.find({},function(err, docs){
 		res.json(docs);
@@ -120,8 +115,8 @@ app.get('/api/images', function(req, res){
 });
 
 app.get('/api/images/single', function(req, res){
-	imagesCollection.find().random(function(err, docs) {
-		res.json(docs);
+	imagesCollection.find({}, function(err, docs) {
+		res.json(docs[Math.floor(Math.random()*docs.length)]);
 	})
 });
 
@@ -144,7 +139,8 @@ app.get('/api/user/:userId', function(req, res){
 
 app.post('/api/user/userId', jsonParser, function(req, res){
 	var userToInsert = req.body
-	console.log("inserting: " + userToInsert)
+	console.log("inserting: ")
+	console.log(userToInsert)
 	delete userToInsert._id
 
 	userCollection.findOne({'name': userToInsert.name},function(err, doc){
@@ -162,6 +158,11 @@ app.post('/api/user/userId', jsonParser, function(req, res){
 	})
 })
 
+app.get('api/matches/:userId', function(req, res){
+
+
+	res.json({"matches" : "matches"})
+})
 
 
 
