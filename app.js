@@ -148,7 +148,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 			delete body._id
 			userCollection.replaceOne(req.body._id, body, function(err, doc){
 				res.send("success")
-			//})
+			})
 		}else{
 			userCollection.insert(req.body, function(err, doc){
 				if(err) throw err;
