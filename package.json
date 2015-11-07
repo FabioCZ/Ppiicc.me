@@ -9,6 +9,7 @@
     "express": "^4.13.3",
     "mongodb": "^2.0.47",
     "monk": "^1.0.1",
+    "multer": "^1.1.0",
     "stdio": "^0.2.7"
   },
   "devDependencies": {},
