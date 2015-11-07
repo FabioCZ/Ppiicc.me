@@ -144,18 +144,14 @@ app.get('/api/user/:userId', function(req, res){
 
 app.post('/api/user/userId', jsonParser, function(req, res){
 	var userToInsert = req.body
-
-	console.log("post: ")
-	console.log(userToInsert)
-	console.log(userToInsert._id)
-	console.log(userToInsert.name)
+	console.log("inserting: " + userToInsert)
 	delete userToInsert._id
-	console.log(userToInsert)
 
 	userCollection.findOne({'name': userToInsert.name},function(err, doc){
 		if(doc){
 			userCollection.remove({'name': userToInsert.name}, function(err, doc){
 				if(err) throw err;
+				console.log("deleted " + userToInsert.name)
 			})
 		}
 
