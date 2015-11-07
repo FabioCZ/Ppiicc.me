@@ -47,7 +47,7 @@ function GetPicAndTagsCallback(res)
 		   cursor.each(function(err, doc) {
 		      assert.equal(err, null);
 					console.log("butts" + doc)
-		      if (!doc) {
+		      if (doc) {
 		         console.log("skipping insertion of " + imageObj.url)
 		      } else {
 		         callback();
