@@ -116,6 +116,7 @@ setTimeout(function(){
 	   cursor.each(function(err, doc) {
 	      assert.equal(err, null);
 				console.log("starting another query")
+				console.log(doc)
 	      if (doc != null && doc.length < 500) {
 					db.close();
 					console.log("actually querying")
