@@ -1,7 +1,7 @@
 picmeApp.factory('matchService', function($http)
 {
 	var matchService = {
-		getMatchList: function($http)
+		getMatches: function($http)
 		{
 			var promise = $http.get('api/matches')
 			
