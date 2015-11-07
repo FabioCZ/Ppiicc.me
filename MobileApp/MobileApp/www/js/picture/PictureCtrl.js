@@ -1,4 +1,4 @@
-﻿picmeControllers.controller('PictureCtrl', ['pictureService', '$scope', function (pictureService, $scope) {
+﻿picmeControllers.controller('PictureCtrl', ['pictureService', 'userService', '$scope', function (pictureService, userService, $scope) {
     // Controller Scope
     var PictureCtrl = this;
     PictureCtrl.scope = $scope;
@@ -10,8 +10,7 @@
     /***** Method Definitions *****/
 
     PictureCtrl.DislikePicture = function () {
-        PictureCtrl.Picturrrrr.vote = false;
-        pictureService.submitVote(PictureCtrl.Picturrrr)
+        pictureService.DislikePicture(PictureCtrl.Picturrrr)
             .then(function (data) {
                 // Maybe display a message here or something
             });
