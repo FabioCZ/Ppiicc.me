@@ -313,7 +313,7 @@ items.sort(function(first, second) {
 
 	console.log("matches:")
 	console.log(bestMatchesUsers);
-	res.json({"matches" : ["1", "2"]})
+	res.json(bestMatchesUsers)
 
 	})
 

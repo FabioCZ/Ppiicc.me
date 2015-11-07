@@ -1,12 +1,19 @@
 # drop db before each trying
 add="http://104.236.184.113:3000/api"
-curl $add/user/user1
-echo " "
-curl $add/user/user2
-echo "voting like:  "
-curl -d '{"_id":"563d9abeb9a4b21944dae9a7","url":"testUrl","tags":["a","b","c","d"]}' -H 'Content-Type: application/json' $add/vote/like/user1
-curl -d '{"_id":"563d9abeb9a4b21944dae9a7","url":"testUrl","tags":[b","c","d"]}' -H 'Content-Type: application/json' $add/vote/like/user2
+user=Sally
+curl $add/user/$user
 
+for i in `seq 1 20`;
+do
+  curl $add/images/next/Sally > file.txt
+  sleep .5
+  picId="$(cat file.txt)"
+  echo "pic:"
+  curl -d '$picId' -H \'Content-Type: application/json\' $add/vote/like/$user
 
-echo "matches are: "
-curl $add/matches/user1
+  curl $add/images/next/Sally > file.txt
+  sleep .5
+  picId="$(cat file.txt)"
+  echo "pic:"
+  curl -d '$picId' -H \'Content-Type: application/json\' $add/vote/dislike/$user
+done
