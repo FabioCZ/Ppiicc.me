@@ -125,9 +125,9 @@ app.get('/api/images/next/:userId', function(req, res){
 		if(doc){
 			//get all imgs
 			imagesCollection.find({}, function(err, imgs) {
-				var imgToTry = imgs[Math.floor(Math.random()*docs.length)]
+				var imgToTry = imgs[Math.floor(Math.random()*imgs.length)]
 				while(doc.liked.indexOf(imgToTry) > -1 || doc.liked.indexOf(imgToTry) > -1){
-					imgToTry = imgs[Math.floor(Math.random()*docs.length)].url
+					imgToTry = imgs[Math.floor(Math.random()*imgs.length)].url
 				}
 				res.json(imgToTry)
 			})
