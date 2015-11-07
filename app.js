@@ -143,7 +143,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 	userCollection.findOne({'name': userToInsert.name},function(err, doc){
 		if(doc){
 			//update
-			console.log("updating")
+			console.log("updating" + userToInsert)
 			console.log(userToInsert)
 			delete userToInsert._id
 			console.log(userToInsert)
