@@ -5,7 +5,7 @@ var stdio = require('stdio');
 var Clarifai = require('./other_libs/clarifai_node.js');
 var API500px = require('500px');
 var api500px = new API500px('uoJZAXqlLu6vuci8LrzmaRTeGmMjWTLRA2tBkjtp');
-
+var url = 'mongodb://0.0.0.0:27017/picme';
 var app = express();
 
 Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
@@ -85,9 +85,9 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-
-
 GetPicAndTags(GetPicAndTagsCallback);
+
+
 
 var router = express.Router();
 
