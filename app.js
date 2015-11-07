@@ -189,10 +189,10 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 			console.log("Doc:")
 			console.log(doc)
 			doc.liked.push(req.body)
-			userCollection.remove({'name': doc.name}, function(err, doc){
+			userCollection.remove({'name': doc.name}, function(err, del){
 				if(err) throw err;
 				console.log("deleted " + doc.name)
-				userCollection.insert(doc, function(err, doc){
+				userCollection.insert(doc, function(err, ins){
 					res.send("sucess")
 				})
 			})
