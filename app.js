@@ -89,6 +89,7 @@ function commonResultHandler( err, res ) {
 	}
 }
 
+GetPicAndTags()
 
 var router = express.Router();
 
