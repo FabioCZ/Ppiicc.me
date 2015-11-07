@@ -56,7 +56,7 @@ function lookForDuplicateShitAndInsertShit(imgs)
 		imagesCollection.find(imgs[x], function(err, docs){
 			console.log(docs);
 			if(docs.length == 0){
-				console.log('inserting:')
+				console.log('inserting:' + x)
 				console.log(imgs[x])
 				imagesCollection.insert(imgs[x]);
 			}
