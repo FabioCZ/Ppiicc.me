@@ -34,7 +34,7 @@ picmeApp.controller('PictureCtrl', ['pictureService', '$scope', pictureService, 
 	{
 		pictureService.getPicture().then(function(data)
 		{
-    		PictureCtrl.picture = data;
+    		PictureCtrl.Picturrrr = data;
   		});
 	};
 }]);
