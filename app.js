@@ -262,7 +262,7 @@ app.get('/api/matches/:userId', function(req, res){
 	var currentUserName = req.params.userId
 	userCollection.find({} , function (err, doc){
 		if(err) throw err;
-		var scores = {"def" : -1}
+		var scores = {}
 		console.log("userName")
 		console.log(currentUserName)
 		var currUser = _.find(doc, function(obj) { return obj.name == currentUserName })
@@ -293,11 +293,12 @@ app.get('/api/matches/:userId', function(req, res){
 					scores[doc[i].name] = distance;
 			}
 		}
+		console.log("matches:")
+		console.log(scores);
+		res.json({"matches" : ["1", "2"]})
 	}
 	})
-	console.log("matches:")
-	console.log(scores);
-	res.json({"matches" : ["1", "2"]})
+
 })
 
 
