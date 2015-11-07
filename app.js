@@ -10,8 +10,6 @@ var api500px = new API500px('uoJZAXqlLu6vuci8LrzmaRTeGmMjWTLRA2tBkjtp');
 Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
 
 var app = express()
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 imagesCollection = db.get("images");
 userCollection = db.get("users");
 
@@ -143,7 +141,7 @@ router.get('/user/:userId', function(req, res){
 	})
 });
 
-router.post('/user/userId', function(req, res){
+router.post('/user/userId',bodyParser.json() function(req, res){
 	var userToInsert = Object.keys(req.body)[0]
 
 	console.log("post: ")
