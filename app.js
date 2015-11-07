@@ -53,11 +53,14 @@ function lookForDuplicateShitAndInsertShit(imgs)
 	console.log("starting insert bitches")
 	imagesCollection = db.get("images");
 	for(x = 0; x < imgs.length; x++){
-		if(!imagesCollection.find(imgs[x])){
-			console.log("inserting:")
-			console.log(imgs[x])
-			imagesCollection.insert(imgs[x])
-		};
+		imagesCollection.find(imgs[x], function(err, docs){
+			console.log(docs);
+			if(!docs){
+				console.log('inserting:')
+				console.log(imgs[x])
+				imagesCollection.insert(imgs[x]);
+			}
+		})
 	}
 }
 
