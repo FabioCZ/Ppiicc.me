@@ -32,31 +32,50 @@ function GetPicAndTagsCallback(res)
 	for(i = 0; i < res.length;i++)
 	{
 		//console.log(res[i].url)
-    imageObj = {}
-    imageObj.url = res[i].url
-    imageObj.tags = []
-    var tag_ct = res[i].result['tag']['classes'].length < 4 ? res[i].result['tag']['classes'].length : 4
+	    imageObj = {}
+	    imageObj.url = res[i].url
+	    imageObj.tags = []
+	    var tag_ct = res[i].result['tag']['classes'].length < 4 ? res[i].result['tag']['classes'].length : 4
 		for(j = 0; j < tag_ct;j++)
-		{
-      imageObj.tags.push(res[i].result['tag']['classes'][j])
+		{	
+	      		imageObj.tags.push(res[i].result['tag']['classes'][j])
 		}
-    MongoClient.connect(url, function(err, db) {
-      assert.equal(null, err);
-      insertDocument(db, function() {
-          db.close();
-      });
-    });
-    console.log(imageObj);
+
+		var findImg = function(db, callback) {
+		   var cursor = db.collection('images').find( { 'url' : imageObj.url});
+		   cursor.each(function(err, doc) {
+		      assert.equal(err, null);
+		      if (doc != null) {
+		         console.dir(doc);
+		      } else {
+		         callback();
+		      }
+		   });
+		};
+
+		var insertDocument = function(db, callback) {
+	  		db.collection('images').insertOne( {
+	   		imageObj
+	   		}, function(err, result) {
+	    		assert.equal(err, null);
+	   			console.log("Inserted image");
+	    		callback(result);
+	  		});
+		};
+
+		MongoClient.connect(url, function(err, db) {
+		  	assert.equal(null, err);
+		  	findImg(db, function() {
+			  	insertDocument(db, function() {
+			  		db.close();
+			  	});
+			  	db.close();
+			});
+		});
+
+	    //console.log(imageObj);
 	}
 }
-
-MongoClient.connect(url, function(err, db) {
- assert.equal(null, err);
- insertDocument(db, function() {
-     db.close();
- });
-});
-
 
 function commonResultHandler( err, res ) {
 	if( err != null ) {
