@@ -1,4 +1,57 @@
 angular.module('starter.services', [])
+    .factory('matchService', function($http)
+    {
+        var matchService = {
+            getMatches: function($http)
+            {
+                var promise = $http.get('api/matches')
+			
+                .then(function(response)
+                {
+                    return response.data;
+                });
+			
+                return promise;
+            }
+        }
+	
+        return matchService;
+    })
+
+    .factory('pictureService', function ($http) {
+        var pictureService = {
+            getPictureList: function () {
+                // $http returns a promise, which has a then function, which also returns a promise
+                var promise = $http.get('http://104.236.184.113:3000/api/images')
+
+                .then(function (response) {
+                    // The return value gets picked up by the then in the controller.
+                    console.log(response.data);
+                    return response.data;
+                });
+                // Return the promise to the controller
+                return promise;
+            },
+
+            submitVote: function (pictureObject) {
+                var promise = $http({
+                    method: "post",
+                    url: "/api/images/vote"
+                })
+
+                .then(function (response) {
+                    return response.data;
+                })
+                .error(function (error) {
+                    return error.data;
+                })
+
+                return promise;
+            }
+        };
+
+        return pictureService;
+    })
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
