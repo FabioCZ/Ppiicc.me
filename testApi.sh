@@ -8,4 +8,4 @@ curl -d '{"_id":"563e3885737e2eb850296429","name":"Fabio","liked":[],"disliked":
 echo "getting img: "
 curl $add/images/next/Fabio
 echo "voting like:  "
-curl -d '{"asd" : "asd"}' -H 'Content-Type: application/json' $add/vote/like
+curl -d '{"_id":"563e3885737e2eb850296429","name":"Fabio","liked":[],"disliked":[]}' -H 'Content-Type: application/json' $add/vote/like
