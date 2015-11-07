@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-var picmeApp = angular.module('picmeApp', ['ngRoute']);
+var picmeApp = angular.module('picmeApp', ['picmeApp.controllers', 'picmeApp.services', 'ngRoute']);
 
 picmeApp = picmeApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -21,3 +21,8 @@ picmeApp = picmeApp.config(['$routeProvider', function($routeProvider) {
 			});
 
 }]);
+
+// Register Services and Controllers
+// (maintaining some compability with mobile app)
+var picmeServices = angular.module('picmeApp.services', '[]');
+var picmeControllers = angular.module('picmeApp.controllers', '[]');

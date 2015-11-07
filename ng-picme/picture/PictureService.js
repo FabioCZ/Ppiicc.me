@@ -1,6 +1,6 @@
 // lol factory
 
-picmeApp.factory('pictureService', function($http)
+picmeServices.factory('pictureService', function($http)
 {
 	var pictureService = {
 		 getPicture: function() {

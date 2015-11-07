@@ -1,4 +1,4 @@
-picmeApp.factory('matchService', function($http)
+picmeServices.factory('matchService', function($http)
 {
 	var matchService = {
 		getMatches: function($http)

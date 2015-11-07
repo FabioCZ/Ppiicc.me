@@ -1,4 +1,4 @@
-picmeApp.controller('MatchCtrl', ['matchService', '$scope', function(matchService, $scope)
+picmeControllers.controller('MatchCtrl', ['matchService', '$scope', function(matchService, $scope)
 {
 	var MatchCtrl = this;
 	MatchCtrl.scope = $scope;
