@@ -137,7 +137,7 @@ app.get('/api/images/next/:userId', function(req, res){
 			res.send("User not found")
 		}
 	})
-}
+})
 
 
 app.get('/api/user/:userId', function(req, res){
