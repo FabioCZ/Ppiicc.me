@@ -110,7 +110,7 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-var imageUpdater = SetTimeout(function(){
+var imageUpdater = setTimeout(function(){
 	if (imagesCollection.find().count() < 500){
 			GetPicAndTags()
 	}else{
