@@ -192,11 +192,12 @@ app.post('api/vote/like/:userId',jsonParser, function(req, res){
 				})
 			})
 		}
+		else
+		{
+			res.send("User Not found")
+		}
 	})
-	else
-	{
-		res.send("User Not found")
-	}
+
 })
 
 app.post('api/vote/dislike/:userId',jsonParser, function(req, res){
