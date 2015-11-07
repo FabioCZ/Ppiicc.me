@@ -33,7 +33,6 @@ function GetPicAndTagsCallback(res)
 	allImages = []
 	for(i = 0; i < res.length;i++)
 	{
-		console.log(res[i].url)
 	    imageObj = {}
 	    imageObj.url = res[i].url
 	    imageObj.tags = []
@@ -44,12 +43,14 @@ function GetPicAndTagsCallback(res)
 		}
 		allImages.push(imageObj)
 	}
+	lookForDuplicateShitAndInsertShit(allImages)
 }
 
 function lookForDuplicateShitAndInsertShit(imgs)
 {
+	console.
 	console.log(imgs)
-	console("starting insert bitches")
+	console.log("starting insert bitches")
 	db = monk('mongodb://0.0.0.0:27017/picme');
 	imagesCollection = db.get("images");
 	for(x = 0; x < imgs.length; x++){
