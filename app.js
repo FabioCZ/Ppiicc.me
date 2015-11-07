@@ -180,7 +180,7 @@ app.post('/api/user/userId', jsonParser, function(req, res){
 	})
 })
 
-app.post('api/vote/like/:userId',jsonParser, function(req, res){
+app.post('api/vote/like/',jsonParser, function(req, res){
 	userCollection.findOne({'name':  req.params.userId},function(err, doc){
 		if(doc){
 			doc.liked.push(req.body)
