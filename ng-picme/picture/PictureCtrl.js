@@ -1,4 +1,4 @@
-picmeApp.controller('PictureCtrl', ['pictureService', '$scope', function(pictureService,$scope) {
+picmeApp.controller('PictureCtrl', ['pictureService', '$scope', function(pictureService, $scope) {
 	// Controller Scope
 	var PictureCtrl = this;
 	PictureCtrl.scope = $scope;
