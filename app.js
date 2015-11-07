@@ -48,13 +48,18 @@ function GetPicAndTagsCallback(res)
 
 function lookForDuplicateShitAndInsertShit(imgs)
 {
+	console.log(imgs)
+	console("starting insert bitches")
 	db = monk('mongodb://0.0.0.0:27017/picme');
 	imagesCollection = db.get("images");
 	for(x = 0; x < imgs.length; x++){
 		if(!imagesCollection.find(imgs[x])){
+			console.log("inserting:")
+			console.log(imgs[x])
 			imagesCollection.insert(imgs[x])
 		};
 	}
+	db.close();
 }
 
 function commonResultHandler( err, res ) {
