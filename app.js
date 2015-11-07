@@ -111,7 +111,7 @@ GetPicAndTags()
 // }, 1000 * 60 * 30);
 
 
-var router = app.Router();
+var router = express.Router();
 app.use('/api', router);
 
 router.get('/images', function(req, res){
