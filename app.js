@@ -31,7 +31,7 @@ function GetPicAndTagsCallback(res)
 {
 	for(i = 0; i < res.length;i++)
 	{
-		//console.log(res[i].url)
+		console.log(res[i].url)
 	    imageObj = {}
 	    imageObj.url = res[i].url
 	    imageObj.tags = []
