@@ -15,7 +15,7 @@ Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) {
 });
 
 function GetPicAndTags(){
-  api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 21},  function(error, results) {
+  api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '1', 'image_size' : 21},  function(error, results) {
   	  if (error) {
   	    console.log(error)
   	    return;
@@ -72,6 +72,7 @@ function GetPicAndTagsCallback(res)
 			  	insertDocument(db, function() {
 			  		db.close();
 			  		console.log('doc inserted')
+
 			  	});
 			  	//db.close();
 				});
@@ -108,9 +109,28 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-GetPicAndTags(GetPicAndTagsCallback);
+setTimeout(function(){
 
+	var findll = function(db, callback) {
+	   var cursor =db.collection('images').find( );
+	   cursor.each(function(err, doc) {
+	      assert.equal(err, null);
+	      if (doc != null && doc.length < 500) {
+					db.close();
+	        GetPicAndTags(GetPicAndTagsCallback)
+	      }else{
+	      callback();
+				}
+	   });
+	};
 
+	MongoClient.connect(url, function(err, db) {
+	  assert.equal(null, err);
+	  findRestaurants(db, function() {
+	      db.close();
+	  });
+	});
+}, 30000);
 
 var router = express.Router();
 
