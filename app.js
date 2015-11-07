@@ -103,7 +103,7 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-//GetPicAndTags()
+GetPicAndTags()
 
 
 // var router = express.Router();
