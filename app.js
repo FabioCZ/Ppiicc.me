@@ -66,13 +66,13 @@ function GetPicAndTagsCallback(res)
 
 		MongoClient.connect(url, function(err, db) {
 		  	assert.equal(null, err);
-		  	//findImg(db, function() {
+		  	findImg(db, function() {
 			  	insertDocument(db, function() {
 			  		db.close();
 			  		console.log('doc inserted')
 			  	});
 			  	//db.close();
-				//});
+				});
 		});
 
 	    //console.log(imageObj);
