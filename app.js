@@ -67,7 +67,8 @@ function GetPicAndTagsCallback(res)
 		  	assert.equal(null, err);
 		  	findImg(db, function() {
 			  	insertDocument(db, function() {
-			  		db.close();
+			  	//	db.close();
+			  	console.log('doc inserted')
 			  	});
 			  	db.close();
 			});
