@@ -11,6 +11,8 @@ picmeApp.controller('PictureCtrl', ['pictureService', '$scope', pictureService, 
 	/* Method Definitions */
 	
 	PictureCtrl.Init = function() {
-		
+		pictureService.getPicture().then(function(data) {
+    		PictureCtrl.picture = data;
+  		});
 	};
 }]);
