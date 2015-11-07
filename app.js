@@ -194,7 +194,7 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 
 			for(i = 0; i < req.body.tags.length;i++)
 			{
-				if(doc.likedTags.hasProperty(req.body.tags[i]))
+				if(doc.likedTags.hasOwnProperty(req.body.tags[i]))
 				{
 					doc[req.body.tags[i]]++;
 				}
