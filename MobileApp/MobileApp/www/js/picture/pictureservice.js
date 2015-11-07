@@ -1,7 +1,30 @@
-﻿picmeServices.factory('pictureService', function ($http) {
+﻿// lol factory
+
+picmeServices.factory('pictureService', function ($http) {
+    var apihost = "http://104.236.184.113:3000/api/";
+
     var pictureService = {
+
+        dislikePicture: function (pictureObject, userId) {
+            var promise = $http({
+                method: "post",
+                url: apihost + "vote/dislike/" + userId,
+                data: pictureObject
+            })
+
+			.then(function (response) {
+			    return response.data;
+			})
+
+			.error(function (error) {
+			    return error.data;
+			})
+
+            return promise;
+        },
+
         getPicture: function () {
-            var promise = $http.get('http://104.236.184.113:3000/api/images/single')
+            var promise = $http.get(apihost + "images/single")
             .then(function (response) {
                 console.log(response.data);
                 return response.data;
@@ -12,29 +35,31 @@
 
         getPictureList: function () {
             // $http returns a promise, which has a then function, which also returns a promise
-            var promise = $http.get('http://104.236.184.113:3000/api/images')
+            var promise = $http.get(apihost + "images")
 
-            .then(function (response) {
-                // The return value gets picked up by the then in the controller.
-                console.log(response.data);
-                return response.data;
-            });
+			.then(function (response) {
+			    // The return value gets picked up by the then in the controller.
+			    console.log(response.data);
+			    return response.data;
+			});
             // Return the promise to the controller
             return promise;
         },
 
-        submitVote: function (pictureObject) {
+        likePicture: function (pictureObject, userId) {
             var promise = $http({
                 method: "post",
-                url: "/api/images/vote"
+                url: apihost + "vote/like/" + userId,
+                data: pictureObject
             })
 
-            .then(function (response) {
-                return response.data;
-            })
-            .error(function (error) {
-                return error.data;
-            })
+			.then(function (response) {
+			    return response.data;
+			})
+
+			.error(function (error) {
+			    return error.data;
+			})
 
             return promise;
         }

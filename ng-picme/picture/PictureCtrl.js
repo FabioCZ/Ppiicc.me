@@ -1,4 +1,4 @@
-picmeControllers.controller('PictureCtrl', ['pictureService', '$scope', function(pictureService, $scope) {
+picmeControllers.controller('PictureCtrl', ['pictureService', 'userService', '$scope', function(pictureService, userService, $scope) {
 	// Controller Scope
 	var PictureCtrl = this;
 	PictureCtrl.scope = $scope;
@@ -9,15 +9,25 @@ picmeControllers.controller('PictureCtrl', ['pictureService', '$scope', function
 	// Run the controller
 	PictureCtrl.Init();
 
+	/*****  Method Definitions *****/
+
 	/* Method Definitions */
 	PictureCtrl.DislikePicture = function()
 	{
-		PictureCtrl.Picturrrrr.vote = false;
-		pictureService.submitVote(PictureCtrl.Picturrrr)
-			.then(function(data)
-			{
-				// Maybe display a message here or something
-			});
+		pictureService.dislikePicture(PictureCtrl.Picturrrr, userService.getUsername())
+		
+		.success(function(data)
+		{
+			// Maybe display a message here or something
+			
+			// Get a new picture
+			PictureCtrl.UpdatePicture();
+		})
+		
+		.error(function(data)
+		{
+			alert("There was an error.  Sorry.");
+		})
 	}
 
 	PictureCtrl.LikePicture = function()
@@ -30,11 +40,14 @@ picmeControllers.controller('PictureCtrl', ['pictureService', '$scope', function
 			})
 	}
 
+    PictureCtrl.UpdatePicture = function () {
+        pictureService.getPicture().then(function (data) {
+            PictureCtrl.Picturrrr = data;
+        });
+    }
+
 	PictureCtrl.Init = function()
 	{
-		pictureService.getPicture().then(function(data)
-		{
-			PictureCtrl.Picturrrr = data;
-		  });
+		PictureCtrl.UpdatePicture();
 	};
 }]);
