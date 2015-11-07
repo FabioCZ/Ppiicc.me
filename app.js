@@ -293,10 +293,21 @@ app.get('/api/matches/:userId', function(req, res){
 					scores[doc[i].name] = distance;
 			}
 		}
-		console.log("matches:")
-		console.log(scores);
-		res.json({"matches" : ["1", "2"]})
 	}
+	var items = Object.keys(scores).map(function(key) {
+    return [key, scores[key]];
+});
+
+// Sort the array based on the second element
+items.sort(function(first, second) {
+    return second[1] - first[1];
+});
+
+	console.log("matches:")
+	console.log(items.slice(0,5));
+
+	res.json({"matches" : ["1", "2"]})
+
 	})
 
 })
