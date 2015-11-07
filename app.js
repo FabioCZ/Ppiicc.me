@@ -180,7 +180,7 @@ app.post('/api/user/userId', jsonParser, function(req, res){
 	})
 })
 
-app.post('api/vote/like', jsonParser, function(req, res){
+app.post('/api/vote/like', jsonParser, function(req, res){
 	var userToInsert = req.body
 	console.log("vote: ")
 	console.log(userToInsert)
