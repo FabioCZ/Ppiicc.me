@@ -103,7 +103,9 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-GetPicAndTags()
+SetTimeout(function(){
+	GetPicAndTags()
+}, 1000 * 60)
 
 
 // var router = express.Router();
