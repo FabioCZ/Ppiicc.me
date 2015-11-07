@@ -112,7 +112,7 @@ function commonResultHandler( err, res ) {
 setTimeout(function(){
 
 	var findall = function(db, callback) {
-	   var ct =db.collection('images').count();
+	   var ct =db.collection('images').find().count();
 		 console.log(ct)
 		 if (ct < 500) {
 		 	db.close();
@@ -131,7 +131,7 @@ setTimeout(function(){
 	      db.close();
 	  });
 	});
-}, 30000);
+}, 10000);
 
 var router = express.Router();
 
