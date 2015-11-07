@@ -10,6 +10,7 @@ var api500px = new API500px('uoJZAXqlLu6vuci8LrzmaRTeGmMjWTLRA2tBkjtp');
 Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
 
 var app = express()
+var jsonParser = bodyParser.json()
 imagesCollection = db.get("images");
 userCollection = db.get("users");
 
@@ -109,8 +110,13 @@ GetPicAndTags()
 // }, 1000 * 60 * 30);
 
 
-var router = express.Router();
-app.use('/api', router);
+// var router = express.Router();
+// app.use('/api', router);
+
+app.post('/test', jsonParser, function (req, res) {
+  if (!req.body) return res.sendStatus(400)
+  console.log(req.body)
+})
 
 router.get('/images', function(req, res){
 	imagesCollection.find({},function(err, docs){
