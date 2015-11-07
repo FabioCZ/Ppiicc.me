@@ -120,7 +120,7 @@ router.get('/images', function(req, res){
 });
 
 router.get('/images/single', function(req, res){
-	imagesCollection.random_one({}, function(err, docs) {
+	imagesCollection.find().random(function(err, docs) {
 		res.json(docs);
 	})
 });
