@@ -114,7 +114,7 @@ GetPicAndTags()
 var router = express.Router();
 app.use('/api', router);
 
-router.get('/images', function(req, res){
+app.get('/images', function(req, res){
 	imagesCollection.find({},function(err, docs){
 		res.json(docs);
 	})
@@ -143,7 +143,7 @@ router.get('/user/:userId', function(req, res){
 	})
 });
 
-router.post('/user/userId',jsonParser, function(req, res){
+app.post('/user/userId',jsonParser, function(req, res){
 	var userToInsert = Object.keys(req.body)[0]
 
 	console.log("post: ")
