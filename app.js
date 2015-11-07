@@ -144,7 +144,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 			console.log(updatedUser)
 			//userCollection.replaceOne(req.body._id, req.body, function(err, doc){
 				res.send("success")
-			})
+			//})
 		}else{
 			userCollection.insert(req.body, function(err, doc){
 				if(err) throw err;
