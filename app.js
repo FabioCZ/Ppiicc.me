@@ -262,6 +262,8 @@ app.get('/api/matches/:userId', function(req, res){
 	userCollection.find({} , function (err, doc){
 		if(err) throw err;
 		var scores = {}
+		console.log("params")
+		console.log(req.params.userId)
 		var currUser = _.find(doc, function(obj) { return obj.name == req.params.userId })
 		console.log("currUser")
 		console.log(currUser)
