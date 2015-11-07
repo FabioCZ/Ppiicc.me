@@ -123,7 +123,7 @@ var router = express.Router();
 
 router.get('/images', function(req, res){
 		imagesCollection.find({},function(err, res){
-			json.send(res);
+			res.json(res);
 		})
 });
 
