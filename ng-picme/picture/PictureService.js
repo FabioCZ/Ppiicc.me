@@ -1,11 +1,19 @@
-picmeApp.service('pictureService', function(){
-	var pictureObject;
-	
-	pictureObject = {
-		url: 'someUrl',
-		tags: 'someTags'
-		
+// lol factory
+
+picmeApp.factory('pictureService', function($http) {
+	var pictureService = {
+		async: function() {
+			// $http returns a promise, which has a then function, which also returns a promise
+			var promise = $http.get('api/images/get')
+			
+			.then(function (response)
+			{
+				// The return value gets picked up by the then in the controller.
+				return response.data;
+			});
+			// Return the promise to the controller
+			return promise;
+		}
 	};
-	
-	return pictureObject;
-})
+	return pictureService;
+});
