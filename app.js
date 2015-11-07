@@ -116,7 +116,7 @@ var imageUpdater = SetTimeout(function(){
 	}else{
 		console.log("db full")
 	}
-	, 1000 * 60 * 30);
+}, 1000 * 60 * 30);
 
 var router = express.Router();
 
