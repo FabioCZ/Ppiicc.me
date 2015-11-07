@@ -120,6 +120,27 @@ router.get('/image/:imageId', function(req, res){
     res.json({message:"Return image data" + req.params.imageId});
 });
 
+router.get('/showAll', function(req, res){
+	var getAll = function(db, callback) {
+		var cursor =db.collection('picme').find( );
+		cursor.each(function(err, doc) {
+			assert.equal(err, null);
+			if (doc != null) {
+				res.json(doc)
+			} else {
+				callback();
+			}
+		});
+	};
+
+	MongoClient.connect(url, function(err, db) {
+		assert.equal(null, err);
+		getAll(db, function() {
+			db.close();
+		});
+	});
+});
+
 app.use('/api', router);
 
 app.use(express.static('public'));
