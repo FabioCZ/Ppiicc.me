@@ -112,21 +112,17 @@ function commonResultHandler( err, res ) {
 setTimeout(function(){
 
 	var findall = function(db, callback) {
-	   var cursor =db.collection('images').find( );
-	   cursor.each(function(err, doc) {
-	      assert.equal(err, null);
-				console.log("starting another query")
-				console.log(doc)
-	      if (doc != null && doc.length < 500) {
-					db.close();
-					console.log("actually querying")
-	        GetPicAndTags(GetPicAndTagsCallback)
-	      }else{
-					console.log("database full enough")
+	   var ct =db.collection('images').count();
+		 console.log(ct)
+		 if (ct < 500) {
+		 	db.close();
+		 	console.log("actually querying")
+		 	GetPicAndTags(GetPicAndTagsCallback)
+		 }else{
+		 	console.log("database full enough")
 
-	      callback();
-				}
-	   });
+		 callback();
+		 }
 	};
 
 	MongoClient.connect(url, function(err, db) {
