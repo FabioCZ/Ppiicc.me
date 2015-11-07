@@ -110,7 +110,13 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-var imageUpdater = SetTimeout(GetPicAndTags, 1000 * 60 * 30);
+var imageUpdater = SetTimeout(function(){
+	if (imagesCollection.find().count() < 500){
+			GetPicAndTags()
+	}else{
+		console.log("db full")
+	}
+	, 1000 * 60 * 30);
 
 var router = express.Router();
 
