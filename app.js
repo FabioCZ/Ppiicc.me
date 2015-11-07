@@ -303,9 +303,14 @@ items.sort(function(first, second) {
     return first[1] - second[1];
 });
 
-	console.log("matches:")
-	console.log(items.slice(0,5));
+	var bestMatches = items.slice(0,5)
+	var bestMatchesUsers = []
+	for(i = 0; i < bestMatches.length;i++){
+		bestMatchesUsers.push(_.find(doc, function(obj) { return obj.name == bestMatches[i][0] }))
+	}
 
+	console.log("matches:")
+	console.log(bestMatchesUsers);
 	res.json({"matches" : ["1", "2"]})
 
 	})
