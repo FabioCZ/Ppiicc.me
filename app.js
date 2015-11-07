@@ -186,6 +186,8 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 	console.log(req.body)
 	userCollection.findOne({'name':  req.params.userId},function(err, doc){
 		if(doc){
+			console.log("Doc:")
+			console.log(doc)
 			doc.liked.push(req.body)
 			userCollection.remove({'name': doc.name}, function(err, doc){
 				if(err) throw err;
