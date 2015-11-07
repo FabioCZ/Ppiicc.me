@@ -138,7 +138,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
 			//update
-			userCollection.updateById(req.body._id, req.body, function(err, doc){
+			userCollection.replaceOne(req.body._id, req.body, function(err, doc){
 				res.send("success")
 			})
 		}else{
