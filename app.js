@@ -119,6 +119,12 @@ router.get('/images', function(req, res){
 	})
 });
 
+router.get('/images/single', function(req, res){
+	imagesCollection.find().random(function(err, docs) {
+		res.json(docs);
+	})
+});
+
 router.get('/user/:userId', function(req, res){
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
