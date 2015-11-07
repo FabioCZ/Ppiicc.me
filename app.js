@@ -113,6 +113,7 @@ setTimeout(function(){
 
 	var findall = function(db, callback) {
 	   var ct =db.collection('images').count();
+		 console.log("count :" + ct)
 		 if (ct < 500) {
 		 	db.close();
 		 	console.log("actually querying")
