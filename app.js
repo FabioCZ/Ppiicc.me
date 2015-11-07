@@ -111,7 +111,7 @@ function commonResultHandler( err, res ) {
 
 setTimeout(function(){
 
-	var findll = function(db, callback) {
+	var findall = function(db, callback) {
 	   var cursor =db.collection('images').find( );
 	   cursor.each(function(err, doc) {
 	      assert.equal(err, null);
@@ -126,7 +126,7 @@ setTimeout(function(){
 
 	MongoClient.connect(url, function(err, db) {
 	  assert.equal(null, err);
-	  findRestaurants(db, function() {
+	  findall(db, function() {
 	      db.close();
 	  });
 	});
