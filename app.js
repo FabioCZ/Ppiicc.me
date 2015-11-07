@@ -124,8 +124,10 @@ app.get('/api/images/single', function(req, res){
 });
 
 app.get('/api/images/byTag/:tag', function(req, res){
-	imagesCollection.find({'tags' : {$elemMatch: req.params.tag}},function(err, docs){
-		console.log(docs);
+	imagesCollection.find({tags : { $elemMatch : {$eq : 'nobody'}}}),function(err, docs){
+		if(doc){
+			res.json(doc)
+		}
 	})
 });
 
