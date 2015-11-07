@@ -272,7 +272,7 @@ app.get('/api/matches/:userId', function(req, res){
 					}else{
 						otherUserValue = doc[i].likedTags[tag];
 					}
-					sum += Math.pow(curUser.likedTags[tag]-otherUserValue,2)
+					sum += Math.pow(currUser.likedTags[tag]-otherUserValue,2)
 				}
 				for( tag in currUser.dislikedTags){
 					if(tag != 'def'){
@@ -281,7 +281,7 @@ app.get('/api/matches/:userId', function(req, res){
 						}else{
 							otherUserValue = doc[i].dislikedTags[tag];
 						}
-						sum += Math.pow(curUser.dislikedTags[tag]-otherUserValue,2)
+						sum += Math.pow(currUser.dislikedTags[tag]-otherUserValue,2)
 					}
 					distance = Math.pow(sum, .5);
 					scores[doc[i].name] = distance;
