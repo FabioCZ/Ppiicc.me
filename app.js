@@ -1,6 +1,6 @@
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
-var monk = require("monk");
+var db = require("monk")('mongodb://0.0.0.0:27017/picme');
 var assert = require('assert');
 var stdio = require('stdio');
 var Clarifai = require('./other_libs/clarifai_node.js');
@@ -51,7 +51,6 @@ function lookForDuplicateShitAndInsertShit(imgs)
 	console.log("imgs to be inserted: ")
 	console.log(imgs)
 	console.log("starting insert bitches")
-	db = monk('mongodb://0.0.0.0:27017/picme');
 	imagesCollection = db.get("images");
 	for(x = 0; x < imgs.length; x++){
 		if(!imagesCollection.find(imgs[x])){
@@ -60,7 +59,6 @@ function lookForDuplicateShitAndInsertShit(imgs)
 			imagesCollection.insert(imgs[x])
 		};
 	}
-	db.close();
 }
 
 function commonResultHandler( err, res ) {
