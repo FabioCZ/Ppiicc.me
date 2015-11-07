@@ -23,14 +23,13 @@ angular.module('starter.controllers', [])
         // Controller Scope
         var PictureCtrl = this;
         PictureCtrl.scope = $scope;
+        $scope.PictureCtrl = PictureCtrl;
 
         // A picturrrr up in hurrrrr
         PictureCtrl.Picturrrrr = [];
 
-        // Run the controller
-        PictureCtrl.Init();
+        /***** Method Definitions *****/
 
-        /* Method Definitions */
         PictureCtrl.DislikePicture = function () {
             PictureCtrl.Picturrrrr.vote = false;
             pictureService.submitVote(PictureCtrl.Picturrrr)
@@ -38,6 +37,10 @@ angular.module('starter.controllers', [])
                     // Maybe display a message here or something
                 });
         }
+
+        PictureCtrl.Init = function () {
+            PictureCtrl.UpdatePicture();
+        };
 
         PictureCtrl.LikePicture = function () {
             PictureCtrl.Picturrrr.vote = true;
@@ -47,11 +50,15 @@ angular.module('starter.controllers', [])
                 })
         }
 
-        PictureCtrl.Init = function () {
+        PictureCtrl.UpdatePicture = function () {
             pictureService.getPicture().then(function (data) {
                 PictureCtrl.Picturrrr = data;
             });
-        };
+        }
+
+        /*****  Run the Controller  *****/
+
+        PictureCtrl.Init();
     }])
 
 .controller('DashCtrl', function($scope) {})
