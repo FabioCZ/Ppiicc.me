@@ -1,8 +1,10 @@
 // lol factory
 
-picmeApp.factory('pictureService', function($http) {
+picmeApp.factory('pictureService', function($http)
+{
 	var pictureService = {
-		getPicture: function() {
+		getPicture: function()
+		{
 			// $http returns a promise, which has a then function, which also returns a promise
 			var promise = $http.get('api/images')
 			
@@ -15,11 +17,11 @@ picmeApp.factory('pictureService', function($http) {
 			return promise;
 		},
 		
-		submitVote: function(pictureObject) {
+		submitVote: function(pictureObject)
+		{
 			var promise = $http({
 				method: "post",
-				url: "/api/images/vote",
-				
+				url: "/api/images/vote"
 			})
 			
 			.then(function (response)
