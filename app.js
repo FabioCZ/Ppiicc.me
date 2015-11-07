@@ -46,9 +46,9 @@ function GetPicAndTagsCallback(res)
 		   var cursor = db.collection('images').find( { 'url' : imageObj.url});
 		   cursor.each(function(err, doc) {
 		      assert.equal(err, null);
-			console.log(doc)
+					console.log("butts" + doc)
 		      if (doc != null) {
-		         console.dir(doc);
+		         console.log("skipping insertion of " + imageObj.url)
 		      } else {
 		         callback();
 		      }
