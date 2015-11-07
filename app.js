@@ -181,7 +181,7 @@ app.post('/api/user/userId', jsonParser, function(req, res){
 })
 
 app.post('/api/vote/like/:userId',jsonParser, function(req, res){
-	console.log("voting")
+	console.log("voting like")
 	console.log(req.params.userId)
 	console.log(req.body)
 	userCollection.findOne({'name':  req.params.userId},function(err, doc){
@@ -206,13 +206,18 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 })
 
 app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
+	console.log("voting dislike")
+	console.log(req.params.userId)
+	console.log(req.body)
 	userCollection.findOne({'name':  req.params.userId},function(err, doc){
 		if(doc){
+			console.log("Doc:")
+			console.log(doc)
 			doc.disliked.push(req.body)
-			userCollection.remove({'name': doc.name}, function(err, doc){
+			userCollection.remove({'name': doc.name}, function(err, del){
 				if(err) throw err;
 				console.log("deleted " + doc.name)
-				userCollection.insert(doc, function(err, doc){
+				userCollection.insert(doc, function(err, ins){
 					res.send("sucess")
 				})
 			})
