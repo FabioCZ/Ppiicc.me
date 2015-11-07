@@ -8,5 +8,5 @@ curl -d '{"_id":"563d9abeb9a4b21944dae9a7","url":"testUrl","tags":["a","b","c","
 curl -d '{"_id":"563d9abeb9a4b21944dae9a7","url":"testUrl","tags":["a","b","c","d"]}' -H 'Content-Type: application/json' $add/vote/like/user2
 
 
-echo "matches"
+echo "matches are: "
 curl $add/matches/user1
