@@ -6,7 +6,8 @@
   "dependencies": {
     "500px": "^0.5.1",
     "express": "^4.13.3",
-    "mongodb": "^2.0.47"
+    "mongodb": "^2.0.47",
+    "stdio": "^0.2.7"
   },
   "devDependencies": {},
   "scripts": {
