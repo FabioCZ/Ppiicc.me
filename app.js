@@ -54,9 +54,9 @@ function GetPicAndTagsCallback(res)
 		};
 
 		var insertDocument = function(db, callback) {
-	  		db.collection('images').insertOne( {
+	  		db.collection('images').insertOne(
 	   		imageObj
-	   		}, function(err, result) {
+	   		, function(err, result) {
 	    		assert.equal(err, null);
 	   			console.log("Inserted image");
 	    		callback(result);
