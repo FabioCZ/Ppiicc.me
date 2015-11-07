@@ -118,60 +118,59 @@ app.post('/test', jsonParser, function (req, res) {
   console.log(req.body)
 })
 
-router.get('/images', function(req, res){
-	imagesCollection.find({},function(err, docs){
-		res.json(docs);
-	})
-});
+// router.get('/images', function(req, res){
+// 	imagesCollection.find({},function(err, docs){
+// 		res.json(docs);
+// 	})
+// });
+//
+// router.get('/images/single', function(req, res){
+// 	imagesCollection.find().random(function(err, docs) {
+// 		res.json(docs);
+// 	})
+// });
+//
+// router.get('/user/:userId', function(req, res){
+// 	userCollection.findOne({'name': req.params.userId},function(err, doc){
+// 		if(doc){
+// 			//user exists return
+// 			res.json(doc)
+// 		}else{
+// 			//create new user and return
+// 			user = {}
+// 			user.name = req.params.userId
+// 			userCollection.insert(user, function(err, doc){
+// 				if(err) throw err;
+// 				res.json(user)
+// 			})
+// 		}
+// 	})
+// });
+//
+// router.post('/user/userId',bodyParser.json(), function(req, res){
+// 	var userToInsert = Object.keys(req.body)[0]
+//
+// 	console.log("post: ")
+// 	console.log(userToInsert)
+// 	console.log(userToInsert._id)
+// 	console.log(userToInsert.name)
+// 	delete userToInsert._id
+// 	console.log(userToInsert)
+//
+// 	userCollection.findOne({'name': userToInsert.name},function(err, doc){
+// 		if(doc){
+// 			userCollection.remove({'name': userToInsert.name}, function(err, doc){
+// 				if(err) throw err;
+// 			})
+// 		}
+//
+// 		userCollection.insert(req.body, function(err, doc){
+// 			if(err) throw err;
+// 			res.send("success")
+// 		})
+// 	})
+// })
 
-router.get('/images/single', function(req, res){
-	imagesCollection.find().random(function(err, docs) {
-		res.json(docs);
-	})
-});
-
-router.get('/user/:userId', function(req, res){
-	userCollection.findOne({'name': req.params.userId},function(err, doc){
-		if(doc){
-			//user exists return
-			res.json(doc)
-		}else{
-			//create new user and return
-			user = {}
-			user.name = req.params.userId
-			userCollection.insert(user, function(err, doc){
-				if(err) throw err;
-				res.json(user)
-			})
-		}
-	})
-});
-
-router.post('/user/userId',bodyParser.json(), function(req, res){
-	var userToInsert = Object.keys(req.body)[0]
-
-	console.log("post: ")
-	console.log(userToInsert)
-	console.log(userToInsert._id)
-	console.log(userToInsert.name)
-	delete userToInsert._id
-	console.log(userToInsert)
-
-	userCollection.findOne({'name': userToInsert.name},function(err, doc){
-		if(doc){
-			userCollection.remove({'name': userToInsert.name}, function(err, doc){
-				if(err) throw err;
-			})
-		}
-
-		userCollection.insert(req.body, function(err, doc){
-			if(err) throw err;
-			res.send("success")
-		})
-	})
-})
-
-//router.get()
 
 
 
