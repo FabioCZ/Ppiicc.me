@@ -113,8 +113,8 @@ router.get('/images', function(req, res){
 	})
 });
 
-router.get('/:user', function(req, res){
-	imagesCollection.findOne({user: req.params.user},function(err, doc){
+router.get('user/:userId', function(req, res){
+	imagesCollection.findOne({user: req.params.userId},function(err, doc){
 		if(doc){
 			res.json(docs)
 		}else{
