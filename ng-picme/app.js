@@ -12,6 +12,7 @@ picmeApp = angular.config(['$routeProvider', function($routeProvider) {
             })
 			
             .when('/matches', {
+				
                 templateUrl: 'matches/template.html',
 				controller: 'MatchesCtrl'
             })
