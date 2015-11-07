@@ -9,6 +9,8 @@ var api500px = new API500px('uoJZAXqlLu6vuci8LrzmaRTeGmMjWTLRA2tBkjtp');
 var url = 'mongodb://0.0.0.0:27017/picme';
 var app = express();
 
+imagesCollection = db.get("images");
+
 Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
 
 Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) {
@@ -48,7 +50,6 @@ function GetPicAndTagsCallback(res)
 
 function lookForDuplicateShitAndInsertShit(imgs)
 {
-	imagesCollection = db.get("images");
 
 	function checkThenInsert (img, callback) {
 
