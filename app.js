@@ -1,5 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var multer = require('multer'); // v1.0.5
+var upload = multer(); // for parsing multipart/form-data
 var Clarifai = require('./other_libs/clarifai_node.js');
 var API500px = require('500px');
 
