@@ -154,7 +154,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 	})
 })
 
-router.get()
+//router.get()
 
 
 
