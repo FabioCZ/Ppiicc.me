@@ -125,7 +125,7 @@ router.get('/user/:userId', function(req, res){
 });
 
 router.post('/user/userId', function(req, res){
-	console.log(req.body)
+	console.log(req)
 	res.send("yay")
 	// userCollection.findOne({user: req.params.userId},function(err, doc){
 	// 	if(doc){
