@@ -1,5 +1,6 @@
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
+var monk = require("monk");
 var assert = require('assert');
 var stdio = require('stdio');
 var Clarifai = require('./other_libs/clarifai_node.js');
@@ -15,7 +16,7 @@ Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) {
 });
 
 function GetPicAndTags(){
-  api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '1', 'image_size' : 21},  function(error, results) {
+  api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 21},  function(error, results) {
   	  if (error) {
   	    console.log(error)
   	    return;
@@ -29,6 +30,7 @@ function GetPicAndTags(){
 
 function GetPicAndTagsCallback(res)
 {
+	allImages = []
 	for(i = 0; i < res.length;i++)
 	{
 		console.log(res[i].url)
@@ -40,45 +42,18 @@ function GetPicAndTagsCallback(res)
 		{
 	      		imageObj.tags.push(res[i].result['tag']['classes'][j])
 		}
+		allImages.push(imageObj)
+	}
+}
 
-		var findImg = function(db, callback) {
-			console.log(i + 'looking for img url: ' + imageObj.url)
-		   var cursor = db.collection('images').find( { 'url' : imageObj.url});
-		   cursor.each(function(err, doc) {
-		      assert.equal(err, null);
-					console.log(i +"results is: " + doc)
-		      if (doc) {
-		         console.log(i +"skipping insertion of " + imageObj.url)
-		      } else {
-						console.log(i +"inserting " + imageObj.url)
-		         callback();
-		      }
-		   });
+function lookForDuplicateShitAndInsertShit(imgs)
+{
+	db = monk('mongodb://0.0.0.0:27017/picme');
+	imagesCollection = db.get("images");
+	for(x = 0; x < imgs.length; x++){
+		if(!imagesCollection.find(imgs[x])){
+			imagesCollection.insert(imgs[x])
 		};
-
-		var insertDocument = function(db, callback) {
-	  		db.collection('images').insertOne(
-	   			imageObj,
-	   			function(err, result) {
-	    		assert.equal(err, null);
-	   			console.log("Inserted image");
-	    		callback(result);
-	  		});
-		};
-
-		MongoClient.connect(url, function(err, db) {
-		  	assert.equal(null, err);
-		  	findImg(db, function() {
-			  	insertDocument(db, function() {
-			  		db.close();
-			  		console.log('doc inserted')
-
-			  	});
-			  	//db.close();
-				});
-		});
-
-	    //console.log(imageObj);
 	}
 }
 
@@ -109,29 +84,6 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-setTimeout(function(){
-
-	var findall = function(db, callback) {
-	   var ct =db.collection('images').find().count();
-		 console.log(ct)
-		 if (ct < 500) {
-		 	db.close();
-		 	console.log("actually querying")
-		 	GetPicAndTags(GetPicAndTagsCallback)
-		 }else{
-		 	console.log("database full enough")
-
-		 callback();
-		 }
-	};
-
-	MongoClient.connect(url, function(err, db) {
-	  assert.equal(null, err);
-	  findall(db, function() {
-	      db.close();
-	  });
-	});
-}, 10000);
 
 var router = express.Router();
 
