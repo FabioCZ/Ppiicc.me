@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "500px": "^0.5.1",
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "mongodb": "^2.0.47",
     "monk": "^1.0.1",
