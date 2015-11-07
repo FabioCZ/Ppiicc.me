@@ -259,7 +259,7 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 })
 
 app.get('/api/matches/:userId', function(req, res){
-	var currentUserName = req.params.userId)
+	var currentUserName = req.params.userId
 	userCollection.find({} , function (err, doc){
 		if(err) throw err;
 		var scores = {}
