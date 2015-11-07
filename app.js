@@ -285,8 +285,8 @@ app.get('api/matches/:userId', function(req, res){
 					distance = Math.pow(sum, .5);
 					scores[doc[i].name] = distance;
 			}
-)
 		}
+	}
 	})
 
 	res.json({"matches" : ["1", "2"]})
