@@ -111,8 +111,8 @@ GetPicAndTags()
 // }, 1000 * 60 * 30);
 
 
-// var router = express.Router();
-// app.use(router)
+var router = express.Router();
+app.use('/api', router);
 
 app.get('/images', function(req, res){
 	imagesCollection.find({},function(err, docs){
@@ -171,7 +171,6 @@ app.post('/user/userId',jsonParser, function(req, res){
 
 
 
-//app.use('/api', router);
 app.use(express.static('public'));
 var server = app.listen(3000, function () {
 	var host = server.address().address;
