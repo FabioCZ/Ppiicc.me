@@ -103,7 +103,7 @@ function commonResultHandler( err, res ) {
 	}
 }
 
-SetTimeout(function(){
+ssetTimeout(function(){
 	GetPicAndTags()
 }, 1000 * 60)
 
