@@ -260,7 +260,7 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 
 app.get('/api/matches/:userId', function(req, res){
 	userCollection.find({} , function (err, doc){
-		if(err) thrown err;
+		if(err) throw err;
 		var scores = {}
 		var currUser = _.find(doc, function(obj) { return obj.name == req.params.userId })
 		console.log("currUser")
