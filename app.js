@@ -114,14 +114,30 @@ router.get('/images', function(req, res){
 });
 
 router.get('/user/:userId', function(req, res){
-	imagesCollection.findOne({user: req.params.userId},function(err, doc){
+	userCollection.findOne({user: req.params.userId},function(err, doc){
 		if(doc){
 			res.json(docs)
 		}else{
+			//create new user
 			res.json({error: "Not found"})
 		}
 	})
 });
+
+router.post('/user/userId', function(req, res){
+	console.log(req.body)
+	res.send("yay")
+	// userCollection.findOne({user: req.params.userId},function(err, doc){
+	// 	if(doc){
+	// 		//update
+	// 		res.json(docs)
+	// 	}else{
+	// 		userCollection.insert
+	// 		res.json("success")
+	// 	}
+	// })
+})
+
 
 
 app.use('/api', router);
