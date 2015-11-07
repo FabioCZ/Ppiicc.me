@@ -15,14 +15,11 @@ picmeApp.factory('pictureService', function($http) {
 			return promise;
 		},
 		
-		likePicture: function(pictureId) {
+		submitVote: function(pictureObject) {
 			var promise = $http({
 				method: "post",
-				url: "/api/images/like",
-				data: {
-					id: pictureId,
-					vote: ""
-				}
+				url: "/api/images/vote",
+				
 			})
 			
 			.then(function (response)

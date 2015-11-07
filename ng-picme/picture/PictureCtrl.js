@@ -10,8 +10,8 @@ picmeApp.controller('PictureCtrl', ['pictureService', '$scope', pictureService, 
 	PictureCtrl.Init();
 	
 	/* Method Definitions */
-	
-	PictureCtrl.DislikePicture = function() {
+	PictureCtrl.DislikePicture = function()
+	{
 		PictureCtrl.Picturrrrr.vote = false;
 		pictureService.submitVote(PictureCtrl.Picturrrr)
 			.then(function(data)
@@ -20,8 +20,20 @@ picmeApp.controller('PictureCtrl', ['pictureService', '$scope', pictureService, 
 			});
 	}
 	
-	PictureCtrl.Init = function() {
-		pictureService.getPicture().then(function(data) {
+	PictureCtrl.LikePicture = function()
+	{
+		PictureCtrl.Picturrrr.vote = true;
+		pictureService.submitVote(PictureCtrl.Picturrrr)
+			.then(function(data)
+			{
+				// Display a message here
+			})
+	}
+	
+	PictureCtrl.Init = function()
+	{
+		pictureService.getPicture().then(function(data)
+		{
     		PictureCtrl.picture = data;
   		});
 	};
