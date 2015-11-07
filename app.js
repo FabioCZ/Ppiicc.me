@@ -135,15 +135,17 @@ router.get('/user/:userId', function(req, res){
 });
 
 router.post('/user/userId',upload.array(), function(req, res){
-	console.log(req.body)
-	res.send("yay")
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
 			//update
-			res.json(docs)
+			userCollection.updateById(req.body._id, req.body, function(err, doc){
+				res.send("success")
+			})
 		}else{
-			userCollection.insert
-			res.json("success")
+			userCollection.insert(req.body, function(err, doc){
+				if(err) throw err;
+				res.send("success")
+			})
 		}
 	})
 })
