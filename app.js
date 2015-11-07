@@ -143,7 +143,7 @@ router.get('/user/:userId', function(req, res){
 	})
 });
 
-router.post('/user/userId',bodyParser, function(req, res){
+router.post('/user/userId', function(req, res){
 	var userToInsert = Object.keys(req.body)[0]
 
 	console.log("post: ")
