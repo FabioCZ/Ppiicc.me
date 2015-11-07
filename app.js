@@ -120,6 +120,30 @@ app.get('/api/images/single', function(req, res){
 	})
 });
 
+app.get('/api/images/next/:userId', function(req, res){
+	userCollection.findOne({'name': req.params.userId},function(err, doc){
+		if(doc){
+			//get all imgs
+			imagesCollection.find({}, function(err, imgs) {
+				var imgToTry = imgs[Math.floor(Math.random()*docs.length)]
+				while(doc.liked.indexOf(imgToTry) > -1 || doc.liked.indexOf(imgToTry) > -1){
+					imgToTry = imgs[Math.floor(Math.random()*docs.length)].url
+				}
+				res.json(imgToTry)
+			})
+		}
+		else
+		{
+			res.send("User not found")
+		}
+	})
+}
+	imagesCollection.find({}, function(err, docs) {
+
+		res.json(docs[Math.floor(Math.random()*docs.length)]);
+	})
+});
+
 app.get('/api/user/:userId', function(req, res){
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
@@ -129,6 +153,8 @@ app.get('/api/user/:userId', function(req, res){
 			//create new user and return
 			user = {}
 			user.name = req.params.userId
+			user.liked = []
+			user.disliked = []
 			userCollection.insert(user, function(err, doc){
 				if(err) throw err;
 				res.json(user)
@@ -158,10 +184,49 @@ app.post('/api/user/userId', jsonParser, function(req, res){
 	})
 })
 
+app.post('api/vote/like/:userId',jsonParser, function(req, res){
+	userCollection.findOne({'name':  req.params.userId},function(err, doc){
+		if(doc){
+			doc.liked.push(req.body)
+			userCollection.remove({'name': doc.name}, function(err, doc){
+				if(err) throw err;
+				console.log("deleted " + doc.name)
+				userCollection.insert(doc, function(err, doc){
+					res.send("sucess")
+				})
+			})
+		})
+	}
+	else
+	{
+		res.send("User Not found")
+	}
+})
+
+app.post('api/vote/dislike/:userId',jsonParser, function(req, res){
+	userCollection.findOne({'name':  req.params.userId},function(err, doc){
+		if(doc){
+			doc.disliked.push(req.body)
+			userCollection.remove({'name': doc.name}, function(err, doc){
+				if(err) throw err;
+				console.log("deleted " + doc.name)
+				userCollection.insert(doc, function(err, doc){
+					res.send("sucess")
+				})
+			})
+		})
+	}
+	else
+	{
+		res.send("User Not found")
+	}
+})
+
+
 app.get('api/matches/:userId', function(req, res){
 
 
-	res.json({"matches" : "matches"})
+	res.json({"matches" : ["1", "2"]})
 })
 
 
