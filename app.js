@@ -208,25 +208,25 @@ app.post('api/vote/like', jsonParser, function(req, res){
 //
 // })
 
-app.post('api/vote/dislike/:userId',jsonParser, function(req, res){
-	userCollection.findOne({'name':  req.params.userId},function(err, doc){
-		if(doc){
-			doc.disliked.push(req.body)
-			userCollection.remove({'name': doc.name}, function(err, doc){
-				if(err) throw err;
-				console.log("deleted " + doc.name)
-				userCollection.insert(doc, function(err, doc){
-					res.send("sucess")
-				})
-			})
-		}
-		else
-		{
-			res.send("User Not found")
-		}
-	})
-
-})
+// app.post('api/vote/dislike/:userId',jsonParser, function(req, res){
+// 	userCollection.findOne({'name':  req.params.userId},function(err, doc){
+// 		if(doc){
+// 			doc.disliked.push(req.body)
+// 			userCollection.remove({'name': doc.name}, function(err, doc){
+// 				if(err) throw err;
+// 				console.log("deleted " + doc.name)
+// 				userCollection.insert(doc, function(err, doc){
+// 					res.send("sucess")
+// 				})
+// 			})
+// 		}
+// 		else
+// 		{
+// 			res.send("User Not found")
+// 		}
+// 	})
+//
+// })
 
 
 app.get('api/matches/:userId', function(req, res){
