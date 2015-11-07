@@ -137,6 +137,8 @@ router.get('/user/:userId', function(req, res){
 });
 
 router.post('/user/userId',upload.array(), function(req, res){
+	console.log("post: ")
+	console.log(req.body)
 	userCollection.findOne({'name': req.body.name},function(err, doc){
 		if(doc){
 			//update
