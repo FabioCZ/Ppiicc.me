@@ -123,6 +123,12 @@ app.get('/api/images/single', function(req, res){
 	})
 });
 
+app.get('/api/images/byTag/:tag', function(req, res){
+	imagesCollection.find({'tags' : {$elemMatch: {req.params.tag}},function(err, docs){
+		console.log(docs);
+	})
+});
+
 app.get('/api/images/next/:userId', function(req, res){
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
