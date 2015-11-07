@@ -146,6 +146,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 			console.log("updating" + userToInsert)
 			console.log(userToInsert)
 			delete userToInsert._id
+			delete userToInsert['_id']
 			console.log(userToInsert)
 			userCollection.updateById(req.body._id, userToInsert, function(err, doc){
 				res.send("success")
