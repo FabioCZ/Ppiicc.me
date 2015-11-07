@@ -47,6 +47,7 @@ function GetPicAndTagsCallback(res)
 		}
 		allImages.push(imageObj)
 	}
+	console.log("fetched data, now trying to insert img data into db")
 	lookForDuplicateShitAndInsertShit(allImages)
 }
 
@@ -100,13 +101,13 @@ function commonResultHandler( err, res ) {
 		}
 	}
 }
-var imageUpdater = setTimeout(function(){
-	if (imagesCollection.find().count() < 500){
-		GetPicAndTags()
-	}else{
-		console.log("db full")
-	}
-}, 1000 * 60 * 30);
+// var imageUpdater = setTimeout(function(){
+// 	if (imagesCollection.find().count() < 500){
+GetPicAndTags()
+// 	}else{
+// 		console.log("db full")
+// 	}
+// }, 1000 * 60 * 30);
 
 
 var router = express.Router();
