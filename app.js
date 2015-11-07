@@ -118,7 +118,7 @@ router.get('/images', function(req, res){
 });
 
 router.get('/user/:userId', function(req, res){
-	userCollection.findOne({user: req.params.userId},function(err, doc){
+	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
 			//user exists return
 			res.json(doc)
@@ -137,7 +137,7 @@ router.get('/user/:userId', function(req, res){
 router.post('/user/userId',upload.array(), function(req, res){
 	console.log(req.body)
 	res.send("yay")
-	userCollection.findOne({user: req.params.userId},function(err, doc){
+	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
 			//update
 			res.json(docs)
