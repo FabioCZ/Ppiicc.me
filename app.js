@@ -151,8 +151,10 @@ app.get('/api/user/:userId', function(req, res){
 			user.name = req.params.userId
 			user.liked = new Array()
 			user.disliked = new Array()
-			user.likedTags = new Object()
-			user.dislikedTags = new Object()
+			user.likedTags = {}
+			user.dislikedTags = {}
+			console.log("inserting user")
+			console.log(user);
 			userCollection.insert(user, function(err, doc){
 				if(err) throw err;
 				res.json(user)
