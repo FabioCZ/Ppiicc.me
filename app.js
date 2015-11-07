@@ -138,11 +138,7 @@ app.get('/api/images/next/:userId', function(req, res){
 		}
 	})
 }
-	imagesCollection.find({}, function(err, docs) {
 
-		res.json(docs[Math.floor(Math.random()*docs.length)]);
-	})
-});
 
 app.get('/api/user/:userId', function(req, res){
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
