@@ -1,5 +1,3 @@
-var picmeServices = angular.module('starter.services', []);
-
 picmeServices.factory('matchService', function($http)
 {
     var matchService = {
