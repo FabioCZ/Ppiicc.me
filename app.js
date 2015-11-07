@@ -310,7 +310,7 @@ items.sort(function(first, second) {
 	for(i = 0; i < bestMatches.length;i++){
 		bestMatchesUsers.push(_.find(doc, function(obj) { return obj.name == bestMatches[i][0] }))
 	}
-
+	bestMatchesUsers.shift()
 	console.log("matches:")
 	console.log(bestMatchesUsers);
 	res.json(bestMatchesUsers)
