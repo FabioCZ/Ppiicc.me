@@ -20,12 +20,12 @@ angular.module('starter.services', [])
 
     .factory('pictureService', function ($http) {
         var pictureService = {
-            getPicture: function() {
+            getPicture: function () {
                 var promise = $http.get('http://104.236.184.113:3000/api/images')
-
-                .then(function(response) {
-                    console.log(response.data[0]);
-                    return response.data[0];
+                .then(function (response) {
+                    var randomIndex = Math.floor(Math.random() * response.data.length);
+                    console.log(response.data[randomIndex]);
+                    return response.data[randomIndex];
                 });
 
                 return promise;
