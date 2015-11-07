@@ -259,14 +259,13 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 })
 
 app.get('/api/matches/:userId', function(req, res){
-	console.log("params")
-	console.log(req.params.userId)
+	var currentUserName = req.params.userId)
 	userCollection.find({} , function (err, doc){
 		if(err) throw err;
 		var scores = {}
-		console.log("params")
-		console.log(req.params.userId)
-		var currUser = _.find(doc, function(obj) { return obj.name == req.params.userId })
+		console.log("userName")
+		console.log(currentUserName)
+		var currUser = _.find(doc, function(obj) { return obj.name == currentUserName })
 		console.log("currUser")
 		console.log(currUser)
 		for(i = 0; i < doc.length; i++)
