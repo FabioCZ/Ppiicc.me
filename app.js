@@ -111,21 +111,22 @@ GetPicAndTags()
 // }, 1000 * 60 * 30);
 
 
-var router = express.Router();
+// var router = express.Router();
+// app.use(router)
 
-router.get('/images', function(req, res){
+app.get('/images', function(req, res){
 	imagesCollection.find({},function(err, docs){
 		res.json(docs);
 	})
 });
 
-router.get('/images/single', function(req, res){
+app.get('/images/single', function(req, res){
 	imagesCollection.find().random(function(err, docs) {
 		res.json(docs);
 	})
 });
 
-router.get('/user/:userId', function(req, res){
+app.get('/user/:userId', function(req, res){
 	userCollection.findOne({'name': req.params.userId},function(err, doc){
 		if(doc){
 			//user exists return
@@ -142,7 +143,7 @@ router.get('/user/:userId', function(req, res){
 	})
 });
 
-router.post('/user/userId',jsonParser, function(req, res){
+app.post('/user/userId',jsonParser, function(req, res){
 	var userToInsert = Object.keys(req.body)[0]
 
 	console.log("post: ")
@@ -170,7 +171,7 @@ router.post('/user/userId',jsonParser, function(req, res){
 
 
 
-app.use('/api', router);
+//app.use('/api', router);
 app.use(express.static('public'));
 var server = app.listen(3000, function () {
 	var host = server.address().address;
