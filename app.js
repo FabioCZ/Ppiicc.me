@@ -202,11 +202,11 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 				console.log(req.body.tags[i])
 				if(doc.likedTags.hasOwnProperty(req.body.tags[i]))
 				{
-					doc[req.body.tags[i]]++;
+					doc.likedTags[req.body.tags[i]]++;
 				}
 				else
 				{
-					doc[req.body.tags[i]] = 1;
+					doc.likedTags[req.body.tags[i]] = 1;
 				}
 			}
 
