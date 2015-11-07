@@ -54,7 +54,7 @@ function lookForDuplicateShitAndInsertShit(imgs)
 
 		imagesCollection.findOne(img, function(err, docs){
 
-			if(docs){
+			if(!docs){
 				imagesCollection.insert(img, function (err, result) {
 
 					callback();
