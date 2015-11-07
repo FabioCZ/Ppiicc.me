@@ -48,7 +48,7 @@ function GetPicAndTagsCallback(res)
 
 function lookForDuplicateShitAndInsertShit(imgs)
 {
-	console.
+	console.log("imgs to be inserted: ")
 	console.log(imgs)
 	console.log("starting insert bitches")
 	db = monk('mongodb://0.0.0.0:27017/picme');
