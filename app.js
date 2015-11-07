@@ -289,7 +289,8 @@ app.get('/api/matches/:userId', function(req, res){
 		}
 	}
 	})
-
+	console.log("matches:")
+	console.log(scores);
 	res.json({"matches" : ["1", "2"]})
 })
 
