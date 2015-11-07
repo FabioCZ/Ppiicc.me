@@ -191,8 +191,8 @@ app.post('api/vote/like/:userId',jsonParser, function(req, res){
 					res.send("sucess")
 				})
 			})
-		})
-	}
+		}
+	})
 	else
 	{
 		res.send("User Not found")
