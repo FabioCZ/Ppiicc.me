@@ -114,7 +114,7 @@ router.get('/images', function(req, res){
 });
 
 router.get('/:user', function(req, res){
-	imagesCollection.findOne({req.params.user},function(err, doc){
+	imagesCollection.findOne({user: req.params.user},function(err, doc){
 		if(doc){
 			res.json(docs)
 		}else{
