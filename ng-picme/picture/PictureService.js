@@ -13,6 +13,24 @@ picmeApp.factory('pictureService', function($http) {
 			});
 			// Return the promise to the controller
 			return promise;
+		},
+		
+		submitVote: function(pictureObject) {
+			var promise = $http({
+				method: "post",
+				url: "/api/images/vote",
+				
+			})
+			
+			.then(function (response)
+			{
+				return response.data;
+			})
+			.error(function(error){
+				return error.data;
+			})
+			
+			return promise;
 		}
 	};
 	
