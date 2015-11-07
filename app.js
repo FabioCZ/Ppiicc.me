@@ -257,10 +257,36 @@ app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
 
 })
 
-
 app.get('api/matches/:userId', function(req, res){
 	userCollection.find({} , function (err, doc){
-
+		var scores = {}
+		var currUser = _.find(doc, function(obj) { return obj.name == req.params.userId })
+		for(i = 0; i < doc.length; i++)
+		{
+			sum = 0;
+			for( tag in currUser.likedTags){
+				if(tag != 'def'){
+					if(!doc[i].likedTags.hasOwnProperty(tag)){
+						otherUserValue = 0;
+					}else{
+						otherUserValue = doc[i].likedTags[tag];
+					}
+					sum += Math.pow(curUser.likedTags[tag]-otherUserValue,2)
+				}
+				for( tag in currUser.dislikedTags){
+					if(tag != 'def'){
+						if(!doc[i].dislikedTags.hasOwnProperty(tag)){
+							otherUserValue = 0;
+						}else{
+							otherUserValue = doc[i].dislikedTags[tag];
+						}
+						sum += Math.pow(curUser.dislikedTags[tag]-otherUserValue,2)
+					}
+					distance = Math.pow(sum, .5);
+					scores[doc[i].name] = distance;
+			}
+)
+		}
 	})
 
 	res.json({"matches" : ["1", "2"]})
