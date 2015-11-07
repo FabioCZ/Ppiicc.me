@@ -48,19 +48,13 @@ function GetPicAndTagsCallback(res)
 
 function lookForDuplicateShitAndInsertShit(imgs)
 {
-	console.log("imgs to be inserted: ")
-	console.log(imgs)
-	console.log("starting insert bitches")
 	imagesCollection = db.get("images");
 
 	function checkThenInsert (img, callback) {
 
-		imagesCollection.find(img, function(err, docs){
-			console.log("found")
-			console.log(docs);
-			if(docs.length == 0){
-				console.log('inserting:' + x)
-				console.log(imgs[x])
+		imagesCollection.findOne(img, function(err, docs){
+
+			if(docs){
 				imagesCollection.insert(img, function (err, result) {
 
 					callback();
