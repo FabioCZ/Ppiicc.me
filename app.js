@@ -52,10 +52,45 @@ function lookForDuplicateShitAndInsertShit(imgs)
 	console.log(imgs)
 	console.log("starting insert bitches")
 	imagesCollection = db.get("images");
-	for(x = 0; x < imgs.length; x++){
-		var promise = imagesCollection.find(imgs[x])
 
-		promise.success(function(docs){
+	function checkThenInsert (img, callback) {
+
+		imagesCollection.find(img, function(err, docs){
+			console.log("found")
+			console.log(docs);
+			if(docs.length == 0){
+				console.log('inserting:' + x)
+				console.log(imgs[x])
+				imagesCollection.insert(img, function (err, result) {
+
+					callback();
+
+				});
+			} else {
+				process.nextTick(callback);
+			}
+		})
+
+	}
+
+	function iterateThroughImgs () {
+
+		var img = imgs.shift();
+
+		if (!img) {
+			console.log('done');
+			return;
+		}
+
+		checkThenInsert(img, iterateThroughImgs);
+
+	}
+
+	iterateThroughImgs();
+
+
+	for(x = 0; x < imgs.length; x++){
+		imagesCollection.find(imgs[x], function(err, docs){
 			console.log("found")
 			console.log(docs);
 			if(docs.length == 0){
@@ -65,6 +100,7 @@ function lookForDuplicateShitAndInsertShit(imgs)
 			}
 		})
 	}
+
 }
 
 function commonResultHandler( err, res ) {
