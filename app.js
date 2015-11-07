@@ -137,7 +137,7 @@ router.get('/user/:userId', function(req, res){
 });
 
 router.post('/user/userId',upload.array(), function(req, res){
-	var userToInsert = Object.keys(req.body)[0].toObject()
+	var userToInsert = Object.keys(req.body)[0]
 	console.log("post: ")
 	console.log(userToInsert)
 	userCollection.findOne({'name': userToInsert.name},function(err, doc){
