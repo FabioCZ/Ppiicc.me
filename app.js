@@ -31,7 +31,7 @@ function GetPicAndTagsCallback(res)
 {
 	for(i = 0; i < res.length;i++)
 	{
-		//console.log(res[i].url)
+		console.log(res[i].url)
 	    imageObj = {}
 	    imageObj.url = res[i].url
 	    imageObj.tags = []
@@ -42,14 +42,15 @@ function GetPicAndTagsCallback(res)
 		}
 
 		var findImg = function(db, callback) {
-			console.log('looking for img url: ' + imageObj.url)
+			console.log(i + 'looking for img url: ' + imageObj.url)
 		   var cursor = db.collection('images').find( { 'url' : imageObj.url});
 		   cursor.each(function(err, doc) {
 		      assert.equal(err, null);
-					console.log("butts" + doc)
+					console.log(i +"results is: " + doc)
 		      if (doc) {
-		         console.log("skipping insertion of " + imageObj.url)
+		         console.log(i +"skipping insertion of " + imageObj.url)
 		      } else {
+						console.log(i +"inserting " + imageObj.url)
 		         callback();
 		      }
 		   });
