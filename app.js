@@ -121,7 +121,7 @@ var imageUpdater = setTimeout(function(){
 var router = express.Router();
 
 router.get('/images', function(req, res){
-		imageCollection.find({},function(err, res){
+		imagesCollection.find({},function(err, res){
 			json.send(res);
 		})
 });
