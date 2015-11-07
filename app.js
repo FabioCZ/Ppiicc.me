@@ -137,7 +137,7 @@ router.get('/user/:userId', function(req, res){
 });
 
 router.post('/user/userId',upload.array(), function(req, res){
-	var userToInsert = Object.keys(req.body)[0]
+	var userToInsert = Object.keys(req.body)[0].toObject()
 	console.log("post: ")
 	console.log(userToInsert)
 	userCollection.findOne({'name': userToInsert.name},function(err, doc){
@@ -145,7 +145,7 @@ router.post('/user/userId',upload.array(), function(req, res){
 			//update
 			console.log("updating")
 			console.log(userToInsert)
-			delete userToInsert.id
+			delete userToInsert._id
 			console.log(userToInsert)
 			userCollection.updateById(req.body._id, userToInsert, function(err, doc){
 				res.send("success")
