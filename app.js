@@ -20,6 +20,7 @@ Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) {
 });
 
 function GetPicAndTags(){
+	console.log("started getting more img data")
 	api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 21},  function(error, results) {
 		if (error) {
 			console.log(error)
