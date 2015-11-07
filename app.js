@@ -120,10 +120,16 @@ router.get('/images', function(req, res){
 router.get('/user/:userId', function(req, res){
 	userCollection.findOne({user: req.params.userId},function(err, doc){
 		if(doc){
-			res.json(docs)
+			//user exists return
+			res.json(doc)
 		}else{
-			//create new user
-			res.json({error: "Not found"})
+			//create new user and return
+			user = {}
+			user.name = req.params.userId
+			userCollection.insert(user, function(err, doc){
+				if(err) throw err;
+				res.json(user)
+			})
 		}
 	})
 });
@@ -131,15 +137,15 @@ router.get('/user/:userId', function(req, res){
 router.post('/user/userId',upload.array(), function(req, res){
 	console.log(req.body)
 	res.send("yay")
-	// userCollection.findOne({user: req.params.userId},function(err, doc){
-	// 	if(doc){
-	// 		//update
-	// 		res.json(docs)
-	// 	}else{
-	// 		userCollection.insert
-	// 		res.json("success")
-	// 	}
-	// })
+	userCollection.findOne({user: req.params.userId},function(err, doc){
+		if(doc){
+			//update
+			res.json(docs)
+		}else{
+			userCollection.insert
+			res.json("success")
+		}
+	})
 })
 
 
