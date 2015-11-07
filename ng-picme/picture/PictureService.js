@@ -4,7 +4,7 @@ picmeApp.factory('pictureService', function($http) {
 	var pictureService = {
 		getPicture: function() {
 			// $http returns a promise, which has a then function, which also returns a promise
-			var promise = $http.get('api/images/get')
+			var promise = $http.get('api/images')
 			
 			.then(function (response)
 			{
@@ -15,4 +15,6 @@ picmeApp.factory('pictureService', function($http) {
 			return promise;
 		}
 	};
+	
+	return pictureService;
 });
