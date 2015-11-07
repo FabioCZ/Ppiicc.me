@@ -2,30 +2,37 @@
     // Controller Scope
     var PictureCtrl = this;
     PictureCtrl.scope = $scope;
-    $scope.PictureCtrl = PictureCtrl;
 
     // A picturrrr up in hurrrrr
     PictureCtrl.Picturrrrr = [];
 
-    /***** Method Definitions *****/
+    // Run the controller
+    PictureCtrl.Init();
 
+    /*****  Method Definitions *****/
+
+    /* Method Definitions */
     PictureCtrl.DislikePicture = function () {
-        pictureService.DislikePicture(PictureCtrl.Picturrrr)
-            .then(function (data) {
-                // Maybe display a message here or something
-            });
-    }
+        pictureService.dislikePicture(PictureCtrl.Picturrrr, userService.getUsername())
 
-    PictureCtrl.Init = function () {
-        PictureCtrl.UpdatePicture();
-    };
+		.success(function (data) {
+		    // Maybe display a message here or something
+
+		    // Get a new picture
+		    PictureCtrl.UpdatePicture();
+		})
+
+		.error(function (data) {
+		    alert("There was an error.  Sorry.");
+		})
+    }
 
     PictureCtrl.LikePicture = function () {
         PictureCtrl.Picturrrr.vote = true;
         pictureService.submitVote(PictureCtrl.Picturrrr)
-            .then(function (data) {
-                // Display a message here
-            })
+			.then(function (data) {
+			    // Display a message here
+			})
     }
 
     PictureCtrl.UpdatePicture = function () {
@@ -34,7 +41,7 @@
         });
     }
 
-    /*****  Run the Controller  *****/
-
-    PictureCtrl.Init();
-}])
+    PictureCtrl.Init = function () {
+        PictureCtrl.UpdatePicture();
+    };
+}]);
