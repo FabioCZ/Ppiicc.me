@@ -262,7 +262,7 @@ app.get('/api/matches/:userId', function(req, res){
 	var currentUserName = req.params.userId
 	userCollection.find({} , function (err, doc){
 		if(err) throw err;
-		var scores = {}
+		var scores = {"def" : -1}
 		console.log("userName")
 		console.log(currentUserName)
 		var currUser = _.find(doc, function(obj) { return obj.name == currentUserName })
