@@ -184,6 +184,7 @@ app.post('api/vote/like', jsonParser, function(req, res){
 	var userToInsert = req.body
 	console.log("vote: ")
 	console.log(userToInsert)
+	res.send("success")
 
 })
 
