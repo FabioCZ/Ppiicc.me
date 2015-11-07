@@ -37,11 +37,12 @@ function GetPicAndTagsCallback(res)
 	    imageObj.tags = []
 	    var tag_ct = res[i].result['tag']['classes'].length < 4 ? res[i].result['tag']['classes'].length : 4
 		for(j = 0; j < tag_ct;j++)
-		{	
+		{
 	      		imageObj.tags.push(res[i].result['tag']['classes'][j])
 		}
 
 		var findImg = function(db, callback) {
+			console.log('looking for img url: ' + imageObj.url)
 		   var cursor = db.collection('images').find( { 'url' : imageObj.url});
 		   cursor.each(function(err, doc) {
 		      assert.equal(err, null);
@@ -55,8 +56,8 @@ function GetPicAndTagsCallback(res)
 
 		var insertDocument = function(db, callback) {
 	  		db.collection('images').insertOne(
-	   		imageObj
-	   		, function(err, result) {
+	   			imageObj,
+	   			function(err, result) {
 	    		assert.equal(err, null);
 	   			console.log("Inserted image");
 	    		callback(result);
@@ -65,13 +66,13 @@ function GetPicAndTagsCallback(res)
 
 		MongoClient.connect(url, function(err, db) {
 		  	assert.equal(null, err);
-		  	findImg(db, function() {
+		  	//findImg(db, function() {
 			  	insertDocument(db, function() {
-			  	//	db.close();
-			  	console.log('doc inserted')
+			  		db.close();
+			  		console.log('doc inserted')
 			  	});
-			  	db.close();
-			});
+			  	//db.close();
+				//});
 		});
 
 	    //console.log(imageObj);
