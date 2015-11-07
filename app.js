@@ -1,33 +1,31 @@
 var express = require('express');
-var MongoClient = require('mongodb').MongoClient;
-var db = require("monk")('mongodb://0.0.0.0:27017/picme');
-var assert = require('assert');
-var stdio = require('stdio');
 var Clarifai = require('./other_libs/clarifai_node.js');
 var API500px = require('500px');
+
+var db = require("monk")('mongodb://0.0.0.0:27017/picme');
 var api500px = new API500px('uoJZAXqlLu6vuci8LrzmaRTeGmMjWTLRA2tBkjtp');
-var url = 'mongodb://0.0.0.0:27017/picme';
+Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
+
 var app = express();
 
 imagesCollection = db.get("images");
-
-Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
+userCollection = db.get("users");
 
 Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) {
 	console.log( bThrottled ? ["throttled. service available again in",waitSeconds,"seconds"].join(' ') : "not throttled");
 });
 
 function GetPicAndTags(){
-  api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 21},  function(error, results) {
-  	  if (error) {
-  	    console.log(error)
-  	    return;
-  	  }
-  	 	image_urls = results.photos.map(function(val) { return val.image_url })
-  	 	ids = image_urls.map(function() { return "test_id"})
+	api500px.photos.getFreshToday({'sort': 'created_at', 'rpp': '20', 'image_size' : 21},  function(error, results) {
+		if (error) {
+			console.log(error)
+			return;
+		}
+		image_urls = results.photos.map(function(val) { return val.image_url })
+		ids = image_urls.map(function() { return "test_id"})
 
-  	 	Clarifai.tagURL( image_urls , ids, commonResultHandler );
-  	});
+		Clarifai.tagURL( image_urls , ids, commonResultHandler );
+	});
 }
 
 function GetPicAndTagsCallback(res)
@@ -35,13 +33,13 @@ function GetPicAndTagsCallback(res)
 	allImages = []
 	for(i = 0; i < res.length;i++)
 	{
-	    imageObj = {}
-	    imageObj.url = res[i].url
-	    imageObj.tags = []
-	    var tag_ct = res[i].result['tag']['classes'].length < 4 ? res[i].result['tag']['classes'].length : 4
+		imageObj = {}
+		imageObj.url = res[i].url
+		imageObj.tags = []
+		var tag_ct = res[i].result['tag']['classes'].length < 4 ? res[i].result['tag']['classes'].length : 4
 		for(j = 0; j < tag_ct;j++)
 		{
-	      		imageObj.tags.push(res[i].result['tag']['classes'][j])
+			imageObj.tags.push(res[i].result['tag']['classes'][j])
 		}
 		allImages.push(imageObj)
 	}
@@ -50,37 +48,25 @@ function GetPicAndTagsCallback(res)
 
 function lookForDuplicateShitAndInsertShit(imgs)
 {
-
 	function checkThenInsert (img, callback) {
-
 		imagesCollection.findOne(img, function(err, docs){
-
 			if(!docs){
 				imagesCollection.insert(img, function (err, result) {
-
 					callback();
-
 				});
 			} else {
 				process.nextTick(callback);
 			}
 		})
-
 	}
-
 	function iterateThroughImgs () {
-
 		var img = imgs.shift();
-
 		if (!img) {
 			console.log('done');
 			return;
 		}
-
 		checkThenInsert(img, iterateThroughImgs);
-
 	}
-
 	iterateThroughImgs();
 }
 
@@ -104,16 +90,16 @@ function commonResultHandler( err, res ) {
 		}
 	}
 	else {
-			if( typeof res["status_code"] === "string" &&
-				( res["status_code"] === "OK" || res["status_code"] === "PARTIAL_ERROR" )) {
-				GetPicAndTagsCallback(res.results)
-			}
+		if( typeof res["status_code"] === "string" &&
+		( res["status_code"] === "OK" || res["status_code"] === "PARTIAL_ERROR" )) {
+			GetPicAndTagsCallback(res.results)
+		}
 	}
 }
 
 var imageUpdater = setTimeout(function(){
 	if (imagesCollection.find().count() < 500){
-			GetPicAndTags()
+		GetPicAndTags()
 	}else{
 		console.log("db full")
 	}
@@ -122,19 +108,17 @@ var imageUpdater = setTimeout(function(){
 var router = express.Router();
 
 router.get('/images', function(req, res){
-		imagesCollection.find({},function(err, docs){
-			res.json(docs);
-		})
+	imagesCollection.find({},function(err, docs){
+		res.json(docs);
+	})
 });
-
 
 
 app.use('/api', router);
 
 app.use(express.static('public'));
 var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
+	var host = server.address().address;
+	var port = server.address().port;
+	console.log('Example app listening at http://%s:%s', host, port);
 });
