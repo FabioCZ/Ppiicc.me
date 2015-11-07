@@ -202,7 +202,6 @@ app.post('/api/vote/like/:userId',jsonParser, function(req, res){
 			res.send("User Not found")
 		}
 	})
-
 })
 
 app.post('/api/vote/dislike/:userId',jsonParser, function(req, res){
