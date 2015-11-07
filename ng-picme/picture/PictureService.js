@@ -4,15 +4,15 @@ picmeApp.factory('pictureService', function($http)
 {
 	var pictureService = {
 		 getPicture: function() {
-                var promise = $http.get('http://104.236.184.113:3000/api/images')
-                .then(function (response) {
-					var randomIndex = Math.floor(Math.random() * response.data.length);
-                    console.log(response.data[randomIndex]);
-                    return response.data[randomIndex];
-                });
+			var promise = $http.get('http://104.236.184.113:3000/api/images')
+			.then(function (response) {
+				var randomIndex = Math.floor(Math.random() * response.data.length);
+				console.log(response.data[randomIndex]);
+				return response.data[randomIndex];
+			});
 
-                return promise;
-            },
+			return promise;
+		},
 			
 		getPictureList: function()
 		{
