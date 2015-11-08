@@ -1,0 +1,29 @@
+﻿<ion-view view-title="{{PictureCtrl.PageTitle}}">
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <button class="button button-block button-assertive" ng-click="PictureCtrl.DislikePicture()">
+                    Dislike
+                </button>
+            </div>
+            <div class="col">
+                <button class="button button-block button-balanced" ng-click="PictureCtrl.LikePicture()">
+                    Like
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <img ng-src="{{ PictureCtrl.PictureMeta.url }}" style="width: 100%;" />
+            </div>
+        </div>
+
+        <div class="padding">
+            <button class="button button-positive" ng-repeat="tag in PictureCtrl.PictureMeta.tags" style="margin-right: 0.3em; margin-bottom: 0.3em;">
+                {{ tag }}
+            </button>
+        </div>
+
+    </ion-content>
+</ion-view>

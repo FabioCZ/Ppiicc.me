@@ -5,20 +5,31 @@ picmeServices.factory('pictureService', function ($http) {
 
     var pictureService = {
 
-        dislikePicture: function (pictureObject, userId) {
+        dislikePicture: function (pictureObject, username) {
             var promise = $http({
                 method: "post",
-                url: apihost + "vote/dislike/" + userId,
+                url: apihost + "vote/dislike/" + username,
                 data: pictureObject
             })
 
-			.then(function (response) {
+			.success(function (response) {
+			    console.log(response);
 			    return response.data;
 			})
 
 			.error(function (error) {
 			    return error.data;
 			})
+
+            return promise;
+        },
+
+        getByTag: function(tagId) {
+            var promise = $http.get(apihost + "images/byTag/" +tagId)
+           .then(function (response) {
+               console.log(response.data);
+               return response.data;
+           });
 
             return promise;
         },
@@ -46,14 +57,14 @@ picmeServices.factory('pictureService', function ($http) {
             return promise;
         },
 
-        likePicture: function (pictureObject, userId) {
+        likePicture: function (pictureObject, username) {
             var promise = $http({
                 method: "post",
-                url: apihost + "vote/like/" + userId,
+                url: apihost + "vote/like/" + username,
                 data: pictureObject
             })
 
-			.then(function (response) {
+			.success(function (response) {
 			    return response.data;
 			})
 

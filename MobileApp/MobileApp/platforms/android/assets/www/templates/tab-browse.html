@@ -1,0 +1,11 @@
+﻿<ion-view view-title="{{BrowseCtrl.Tag}}">
+    <ion-content>
+        
+        <div class="row" ng-repeat="Picture in BrowseCtrl.Pictures">
+            <div class="col">
+                <img ng-src="{{ Picture.url }}" />
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

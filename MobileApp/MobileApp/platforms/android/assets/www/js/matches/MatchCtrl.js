@@ -1,16 +1,24 @@
-﻿picmeControllers.controller('MatchCtrl', function (matchService, $scope) {
+﻿picmeControllers.controller('MatchCtrl', function (matchService, userService, $scope) {
     var MatchCtrl = this;
-    MatchCtrl.scope = $scope;
 
-    MatchCtrl.Matches = [];
+    MatchCtrl.PageTitle = "Your Matches";
+    MatchCtrl.Matches = {};
 
-    MatchCtrl.Init();
+    /***** Method Declarations/Definitions *****/
 
-    /* Method Declarations/Definitions */
+    MatchCtrl.Init = function () {
+        var Username = userService.getUsername();
 
-    MatchCtrl.Init = function (matchService) {
-        matchService.getMatches().then(function (data) {
+        MatchCtrl.PageTitle = Username;
+
+        console.log(Username);
+        matchService.getMatches(Username).then(function (data) {
+            console.log(data);
             MatchCtrl.Matches = data;
         });
     }
+
+    /***** Run the Controller *****/
+    $scope.MatchCtrl = MatchCtrl;
+    MatchCtrl.Init();
 });

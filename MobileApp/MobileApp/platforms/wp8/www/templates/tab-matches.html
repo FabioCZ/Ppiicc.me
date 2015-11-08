@@ -1,0 +1,16 @@
+<ion-view view-title="{{MatchCtrl.PageTitle}}">
+  <ion-content class="padding">
+      <span ng-show="MatchCtrl.Matches.length == 0">
+          Sorry, you do not have any matches.
+      </span>
+
+      <div class="list">
+
+          <a class="item item-avatar" href="#" ng-repeat="match in MatchCtrl.Matches track by $index">
+              <img ng-src="/img/{{$index}}.jpg">
+              <h2>{{ match.name }}</h2>
+          </a>
+
+      </div>
+  </ion-content>
+</ion-view>

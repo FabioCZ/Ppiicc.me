@@ -1,0 +1,14 @@
+﻿<ion-view view-title="Museums">
+    <ion-content>
+
+        <div class="card" ng-repeat="Museum in Museums">
+            <div class="item item-divider">
+                {{Museum.organization_constituent_name}}
+            </div>
+            <div class="item item-text-wrap">
+                {{Museum.organization_billing_address}}
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
