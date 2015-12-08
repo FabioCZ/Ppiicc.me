@@ -2,9 +2,9 @@
 var stdio = require('stdio');
 var Clarifai = require('./other_libs/clarifai_node.js');
 var API500px = require('500px'),
-    api500px = new API500px('uoJZAXqlLu6vuci8LrzmaRTeGmMjWTLRA2tBkjtp');
+    api500px = new API500px('ADD_API_KEYHERE');
 
-Clarifai.initAPI("0OGzXX35e4FTWIXN2Gxm1UQTPxyKRMQjZ70ZQlQf", "p4C6nhkTXC16j0FuWFR-AQ3tM6IBt5ZMT1qNydH0");
+Clarifai.initAPI("ADD_API_KEY_HERE", "ADD_API_KEY_HERE");
 
 Clarifai.setThrottleHandler( function( bThrottled, waitSeconds ) { 
 	console.log( bThrottled ? ["throttled. service available again in",waitSeconds,"seconds"].join(' ') : "not throttled");
